@@ -18,17 +18,35 @@ namespace _0905
             textBox3.ReadOnly = true;
         }
 
-        long x, y;
+        double x, y;
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_Leave(object sender, EventArgs e) // control이 포커스를 잃을때 이벤트 발생
         {
-            x = long.Parse(textBox1.Text); // 바꿀 문자열이 Null 인경우 에러
-            //Convert.ToInt64(textBox1.Text); Convert => Null인경우 무시
+            try
+            {
+                x = long.Parse(textBox1.Text); // 바꿀 문자열이 올바르지 않을 경우 에러
+                // Convert.ToInt64(textBox1.Text);
+            }
+            catch
+            {
+                MessageBox.Show("숫자를 입력해주세요.");
+                textBox1.Text = "";
+                textBox1.Focus();
+            }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void textBox2_Leave(object sender, EventArgs e)
         {
-            y = long.Parse(textBox2.Text);
+            try
+            {
+                y = long.Parse(textBox2.Text);
+            }
+            catch
+            {
+                MessageBox.Show("숫자를 입력해주세요.");
+                textBox2.Text = "";
+                textBox2.Focus();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
