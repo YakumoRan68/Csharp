@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _1031
@@ -39,7 +33,7 @@ namespace _1031
             }
             catch(System.IO.FileNotFoundException)
             {
-                Console.WriteLine("file not found");
+                frame = 1;
                 return;
             }
         }

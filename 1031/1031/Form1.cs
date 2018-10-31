@@ -17,13 +17,13 @@ namespace _1031
             InitializeComponent();
         }
         int pos = 0;
-        int delta = 0;
+        bool delta = true;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = DateTime.Now.ToString();
-            
-            
+            pos = delta ? ++pos : --pos;
+            delta = pos == 5 || pos == 0 ? !delta : delta;
             hScrollBar1.Value = pos;
         }
     }
