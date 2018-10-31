@@ -18,10 +18,9 @@ namespace _1031
             InitializeComponent();
         }
         int tick = 1;
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            for (int i = 1; i <= 3; i++) { 
+            for (int i = 1; i <= 3; i++) { //pictureBox1, 2, 3의 컨트롤을 가져오기 위해 사용
                 var count = Directory.GetFiles(@Environment.CurrentDirectory + "/../../Images/" + i.ToString() + "/", "*.jpg").Length; // 해당 이름을 가진 디렉토리의 파일 갯수
                 ((PictureBox)Controls["pictureBox" + i.ToString()]).Image = Image.FromFile(Environment.CurrentDirectory + "/../../Images/" + i.ToString() + "/" + Convert.ToString((tick % count) + 1) + ".jpg");
             }
