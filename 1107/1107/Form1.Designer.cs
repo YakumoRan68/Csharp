@@ -289,7 +289,7 @@
             this.Screen.Location = new System.Drawing.Point(14, 39);
             this.Screen.Name = "Screen";
             this.Screen.Size = new System.Drawing.Size(322, 19);
-            this.Screen.TabIndex = 14;
+            this.Screen.TabIndex = 0;
             this.Screen.Text = "                                                    ";
             // 
             // pictureBox1
@@ -313,14 +313,13 @@
             // 
             // MemoryScreen
             // 
-            this.MemoryScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MemoryScreen.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MemoryScreen.Font = new System.Drawing.Font("굴림", 14F);
             this.MemoryScreen.Location = new System.Drawing.Point(12, 12);
             this.MemoryScreen.Name = "MemoryScreen";
             this.MemoryScreen.Size = new System.Drawing.Size(322, 19);
-            this.MemoryScreen.TabIndex = 17;
-            this.MemoryScreen.Text = "                                                    ";
+            this.MemoryScreen.TabIndex = 0;
+            this.MemoryScreen.Text = "                                      ";
             // 
             // Form1
             // 

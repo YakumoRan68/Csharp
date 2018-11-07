@@ -10,11 +10,10 @@ using System.Windows.Forms;
 
 namespace _1107 {
     public partial class Form1 : Form {
-        enum Day { Sat = 1, Sun, Mon, Tue, Wed, Thu, Fri };
         string ScreenBuffer = "";
-        long[] Num = { 0 };
-        decimal[] Fnum = { 0 }; //.이 입력됐을경우 모든 연산은 Fnum을 사용
-        byte[] OpBuffer = { 0 }; // (무연산자), +, -, *, /
+        long[] Num = { 0,};
+        decimal[] Fnum = { 0,}; //.이 입력됐을경우 모든 연산은 Fnum을 사용
+        byte[] OpBuffer = { 0,}; // (무연산자), +, -, *, /
         byte bufferptr = 0; // 연산자의 포인터
         bool IsDot = false; // 실수형인지 정수형인지
 
@@ -23,7 +22,14 @@ namespace _1107 {
         }
 
         private void MemoryScreenUpdate() {
-
+            char op = '+';
+            switch(OpBuffer[bufferptr]) {
+                case 1: op = '+'; break;
+                case 2: op = '-'; break;
+                case 3: op = '*'; break;
+                case 4: op = '/'; break;
+            }
+            MemoryScreen.Text = MemoryScreen.Text + " " + ScreenBuffer + " " + op;
         }
 
         private void AddNumToScreen(string op) {
@@ -33,9 +39,9 @@ namespace _1107 {
 
         private void AddOpToScreen(byte op) {
             OpBuffer[bufferptr] = op;
+            MemoryScreenUpdate();
             bufferptr++;
             IsDot = false;
-            MemoryScreenUpdate();
             ScreenBuffer = "";
         }
 
@@ -85,7 +91,8 @@ namespace _1107 {
 
         private void Dot_Click(object sender, EventArgs e) {
             if(!IsDot) {
-                AddNumToScreen(".");
+                if (ScreenBuffer.Length == 0) AddNumToScreen("0.");
+                else AddNumToScreen(".");
                 IsDot = true;
             }
         }
@@ -97,6 +104,7 @@ namespace _1107 {
             foreach(int i in OpBuffer) OpBuffer[i] = 0;
             IsDot = false;
             Screen.Text = "";
+            MemoryScreen.Text = "";
         }
 
         private void CE_Click(object sender, EventArgs e) { // 스크린버퍼만 초기화
