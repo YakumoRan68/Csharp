@@ -10,15 +10,20 @@ using System.Windows.Forms;
 
 namespace _1107 {
     public partial class Form1 : Form {
-        string ScreenBuffer = "";
-        long[] Num = { 0,};
-        decimal[] Fnum = { 0,}; //.이 입력됐을경우 모든 연산은 Fnum을 사용
-        byte[] OpBuffer = { 0,}; // (무연산자), +, -, *, /
+        static int buffersize = 100; //필드 이니셜라이저(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
+        string ScreenBuffer = String.Empty;
+        long[] Num = new long[buffersize];
+        decimal[] Fnum = new decimal[buffersize]; //.이 입력됐을경우 모든 연산은 Fnum을 사용
+        byte[] OpBuffer = new byte[buffersize]; // (무연산자), +, -, *, /
         byte bufferptr = 0; // 연산자의 포인터
         bool IsDot = false; // 실수형인지 정수형인지
 
         public Form1() {
             InitializeComponent();
+        }
+
+        private void GetResult() {
+
         }
 
         private void MemoryScreenUpdate() {
@@ -29,7 +34,9 @@ namespace _1107 {
                 case 3: op = '*'; break;
                 case 4: op = '/'; break;
             }
-            MemoryScreen.Text = MemoryScreen.Text + " " + ScreenBuffer + " " + op;
+            int numToTrim = (op + " " + ScreenBuffer + " ").Length;
+            Memory.Text = Memory.Text + ScreenBuffer + " " + op + " ";
+            MemoryScreen.Text = Memory.Text.Substring(Memory.Text.Length > 30 ? Memory.Text.Length - 31 : 0, Memory.Text.Length <= 30 ? Memory.Text.Length : 30);
         }
 
         private void AddNumToScreen(string op) {
@@ -38,11 +45,12 @@ namespace _1107 {
         }
 
         private void AddOpToScreen(byte op) {
+            if (ScreenBuffer == String.Empty) return;
             OpBuffer[bufferptr] = op;
             MemoryScreenUpdate();
             bufferptr++;
             IsDot = false;
-            ScreenBuffer = "";
+            ScreenBuffer = String.Empty;
         }
 
         private void NUM0_Click(object sender, EventArgs e) {
@@ -98,19 +106,20 @@ namespace _1107 {
         }
 
         private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
-            ScreenBuffer = "";
+            ScreenBuffer = String.Empty;
             foreach(int i in Num) Num[i] = 0;
             foreach(int i in Fnum) Fnum[i] = 0;
             foreach(int i in OpBuffer) OpBuffer[i] = 0;
             IsDot = false;
-            Screen.Text = "";
-            MemoryScreen.Text = "";
+            Screen.Text = String.Empty;
+            Memory.Text = String.Empty;
+            MemoryScreen.Text = String.Empty;
         }
 
         private void CE_Click(object sender, EventArgs e) { // 스크린버퍼만 초기화
             IsDot = false;
-            ScreenBuffer = "";
-            Screen.Text = "";
+            ScreenBuffer = String.Empty;
+            Screen.Text = String.Empty;
         }
 
         private void Backspace_Click(object sender, EventArgs e) {
@@ -125,6 +134,25 @@ namespace _1107 {
 
         private void Plus_Click(object sender, EventArgs e) {
             AddOpToScreen(1);
+        }
+
+        private void Minus_Click(object sender, EventArgs e)
+        {
+            AddOpToScreen(2);
+        }
+
+        private void Multiply_Click(object sender, EventArgs e)
+        {
+            AddOpToScreen(3);
+        }
+
+        private void divide_Click(object sender, EventArgs e)
+        {
+            AddOpToScreen(4);
+        }
+
+        private void TestB_Click(object sender, EventArgs e) {
+            
         }
     }
 }

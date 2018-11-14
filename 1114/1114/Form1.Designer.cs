@@ -50,16 +50,18 @@
             this.Minus = new System.Windows.Forms.Button();
             this.Equal = new System.Windows.Forms.Button();
             this.Screen = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.NUM00 = new System.Windows.Forms.Button();
             this.MemoryScreen = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.TestB = new System.Windows.Forms.Button();
+            this.Memory = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NUM1
             // 
             this.NUM1.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM1.Location = new System.Drawing.Point(12, 262);
+            this.NUM1.Location = new System.Drawing.Point(12, 269);
             this.NUM1.Name = "NUM1";
             this.NUM1.Size = new System.Drawing.Size(61, 55);
             this.NUM1.TabIndex = 1;
@@ -70,7 +72,7 @@
             // NUM2
             // 
             this.NUM2.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM2.Location = new System.Drawing.Point(72, 262);
+            this.NUM2.Location = new System.Drawing.Point(72, 269);
             this.NUM2.Name = "NUM2";
             this.NUM2.Size = new System.Drawing.Size(61, 55);
             this.NUM2.TabIndex = 2;
@@ -81,7 +83,7 @@
             // NUM3
             // 
             this.NUM3.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM3.Location = new System.Drawing.Point(132, 262);
+            this.NUM3.Location = new System.Drawing.Point(132, 269);
             this.NUM3.Name = "NUM3";
             this.NUM3.Size = new System.Drawing.Size(61, 55);
             this.NUM3.TabIndex = 3;
@@ -92,7 +94,7 @@
             // NUM0
             // 
             this.NUM0.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM0.Location = new System.Drawing.Point(12, 323);
+            this.NUM0.Location = new System.Drawing.Point(12, 330);
             this.NUM0.Name = "NUM0";
             this.NUM0.Size = new System.Drawing.Size(121, 55);
             this.NUM0.TabIndex = 1;
@@ -103,7 +105,7 @@
             // Dot
             // 
             this.Dot.Font = new System.Drawing.Font("굴림", 11F);
-            this.Dot.Location = new System.Drawing.Point(132, 323);
+            this.Dot.Location = new System.Drawing.Point(132, 330);
             this.Dot.Name = "Dot";
             this.Dot.Size = new System.Drawing.Size(61, 55);
             this.Dot.TabIndex = 2;
@@ -114,7 +116,7 @@
             // NUM7
             // 
             this.NUM7.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM7.Location = new System.Drawing.Point(12, 140);
+            this.NUM7.Location = new System.Drawing.Point(12, 147);
             this.NUM7.Name = "NUM7";
             this.NUM7.Size = new System.Drawing.Size(61, 55);
             this.NUM7.TabIndex = 1;
@@ -125,7 +127,7 @@
             // NUM8
             // 
             this.NUM8.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM8.Location = new System.Drawing.Point(72, 140);
+            this.NUM8.Location = new System.Drawing.Point(72, 147);
             this.NUM8.Name = "NUM8";
             this.NUM8.Size = new System.Drawing.Size(61, 55);
             this.NUM8.TabIndex = 2;
@@ -136,7 +138,7 @@
             // NUM9
             // 
             this.NUM9.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM9.Location = new System.Drawing.Point(132, 140);
+            this.NUM9.Location = new System.Drawing.Point(132, 147);
             this.NUM9.Name = "NUM9";
             this.NUM9.Size = new System.Drawing.Size(61, 55);
             this.NUM9.TabIndex = 3;
@@ -147,7 +149,7 @@
             // NUM4
             // 
             this.NUM4.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM4.Location = new System.Drawing.Point(12, 201);
+            this.NUM4.Location = new System.Drawing.Point(12, 208);
             this.NUM4.Name = "NUM4";
             this.NUM4.Size = new System.Drawing.Size(61, 55);
             this.NUM4.TabIndex = 1;
@@ -158,7 +160,7 @@
             // NUM5
             // 
             this.NUM5.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM5.Location = new System.Drawing.Point(72, 201);
+            this.NUM5.Location = new System.Drawing.Point(72, 208);
             this.NUM5.Name = "NUM5";
             this.NUM5.Size = new System.Drawing.Size(61, 55);
             this.NUM5.TabIndex = 2;
@@ -170,7 +172,7 @@
             // 
             this.NUM6.Cursor = System.Windows.Forms.Cursors.Default;
             this.NUM6.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM6.Location = new System.Drawing.Point(132, 201);
+            this.NUM6.Location = new System.Drawing.Point(132, 208);
             this.NUM6.Name = "NUM6";
             this.NUM6.Size = new System.Drawing.Size(61, 55);
             this.NUM6.TabIndex = 3;
@@ -181,7 +183,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 392);
+            this.label1.Location = new System.Drawing.Point(15, 430);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 12);
             this.label1.TabIndex = 4;
@@ -190,18 +192,18 @@
             // AC
             // 
             this.AC.Font = new System.Drawing.Font("굴림", 11F);
-            this.AC.Location = new System.Drawing.Point(132, 79);
+            this.AC.Location = new System.Drawing.Point(132, 86);
             this.AC.Name = "AC";
             this.AC.Size = new System.Drawing.Size(61, 55);
             this.AC.TabIndex = 5;
-            this.AC.Text = "AC";
+            this.AC.Text = "C";
             this.AC.UseVisualStyleBackColor = true;
             this.AC.Click += new System.EventHandler(this.AC_Click);
             // 
             // CE
             // 
             this.CE.Font = new System.Drawing.Font("굴림", 11F);
-            this.CE.Location = new System.Drawing.Point(72, 79);
+            this.CE.Location = new System.Drawing.Point(72, 86);
             this.CE.Name = "CE";
             this.CE.Size = new System.Drawing.Size(61, 55);
             this.CE.TabIndex = 6;
@@ -212,7 +214,7 @@
             // Backspace
             // 
             this.Backspace.Font = new System.Drawing.Font("굴림", 11F);
-            this.Backspace.Location = new System.Drawing.Point(12, 79);
+            this.Backspace.Location = new System.Drawing.Point(12, 86);
             this.Backspace.Name = "Backspace";
             this.Backspace.Size = new System.Drawing.Size(61, 55);
             this.Backspace.TabIndex = 7;
@@ -223,7 +225,7 @@
             // PM
             // 
             this.PM.Font = new System.Drawing.Font("굴림", 11F);
-            this.PM.Location = new System.Drawing.Point(208, 79);
+            this.PM.Location = new System.Drawing.Point(208, 86);
             this.PM.Name = "PM";
             this.PM.Size = new System.Drawing.Size(61, 55);
             this.PM.TabIndex = 12;
@@ -233,27 +235,29 @@
             // Multiply
             // 
             this.Multiply.Font = new System.Drawing.Font("굴림", 11F);
-            this.Multiply.Location = new System.Drawing.Point(208, 201);
+            this.Multiply.Location = new System.Drawing.Point(208, 208);
             this.Multiply.Name = "Multiply";
             this.Multiply.Size = new System.Drawing.Size(61, 55);
             this.Multiply.TabIndex = 9;
             this.Multiply.Text = "*";
             this.Multiply.UseVisualStyleBackColor = true;
+            this.Multiply.Click += new System.EventHandler(this.Multiply_Click);
             // 
             // divide
             // 
             this.divide.Font = new System.Drawing.Font("굴림", 11F);
-            this.divide.Location = new System.Drawing.Point(208, 140);
+            this.divide.Location = new System.Drawing.Point(208, 147);
             this.divide.Name = "divide";
             this.divide.Size = new System.Drawing.Size(61, 55);
             this.divide.TabIndex = 10;
             this.divide.Text = "/";
             this.divide.UseVisualStyleBackColor = true;
+            this.divide.Click += new System.EventHandler(this.divide_Click);
             // 
             // Plus
             // 
             this.Plus.Font = new System.Drawing.Font("굴림", 11F);
-            this.Plus.Location = new System.Drawing.Point(208, 323);
+            this.Plus.Location = new System.Drawing.Point(208, 330);
             this.Plus.Name = "Plus";
             this.Plus.Size = new System.Drawing.Size(61, 55);
             this.Plus.TabIndex = 8;
@@ -264,17 +268,18 @@
             // Minus
             // 
             this.Minus.Font = new System.Drawing.Font("굴림", 11F);
-            this.Minus.Location = new System.Drawing.Point(208, 262);
+            this.Minus.Location = new System.Drawing.Point(208, 269);
             this.Minus.Name = "Minus";
             this.Minus.Size = new System.Drawing.Size(61, 55);
             this.Minus.TabIndex = 11;
             this.Minus.Text = "-";
             this.Minus.UseVisualStyleBackColor = true;
+            this.Minus.Click += new System.EventHandler(this.Minus_Click);
             // 
             // Equal
             // 
             this.Equal.Font = new System.Drawing.Font("굴림", 11F);
-            this.Equal.Location = new System.Drawing.Point(275, 262);
+            this.Equal.Location = new System.Drawing.Point(275, 269);
             this.Equal.Name = "Equal";
             this.Equal.Size = new System.Drawing.Size(61, 116);
             this.Equal.TabIndex = 13;
@@ -285,26 +290,18 @@
             // 
             this.Screen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Screen.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Screen.Font = new System.Drawing.Font("굴림", 14F);
-            this.Screen.Location = new System.Drawing.Point(14, 39);
+            this.Screen.Font = new System.Drawing.Font("굴림", 16F);
+            this.Screen.Location = new System.Drawing.Point(14, 38);
             this.Screen.Name = "Screen";
-            this.Screen.Size = new System.Drawing.Size(322, 19);
+            this.Screen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Screen.Size = new System.Drawing.Size(320, 25);
             this.Screen.TabIndex = 0;
             this.Screen.Text = "                                                    ";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Location = new System.Drawing.Point(14, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(322, 46);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
             // 
             // NUM00
             // 
             this.NUM00.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM00.Location = new System.Drawing.Point(132, 384);
+            this.NUM00.Location = new System.Drawing.Point(132, 391);
             this.NUM00.Name = "NUM00";
             this.NUM00.Size = new System.Drawing.Size(61, 39);
             this.NUM00.TabIndex = 16;
@@ -315,18 +312,64 @@
             // 
             this.MemoryScreen.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MemoryScreen.Font = new System.Drawing.Font("굴림", 14F);
-            this.MemoryScreen.Location = new System.Drawing.Point(12, 12);
+            this.MemoryScreen.Location = new System.Drawing.Point(13, 19);
             this.MemoryScreen.Name = "MemoryScreen";
-            this.MemoryScreen.Size = new System.Drawing.Size(322, 19);
+            this.MemoryScreen.Size = new System.Drawing.Size(321, 19);
             this.MemoryScreen.TabIndex = 0;
-            this.MemoryScreen.Text = "                                      ";
+            this.MemoryScreen.Text = "                                             ";
+            // 
+            // TestB
+            // 
+            this.TestB.Font = new System.Drawing.Font("굴림", 11F);
+            this.TestB.Location = new System.Drawing.Point(273, 208);
+            this.TestB.Name = "TestB";
+            this.TestB.Size = new System.Drawing.Size(61, 55);
+            this.TestB.TabIndex = 17;
+            this.TestB.Text = "Test";
+            this.TestB.UseVisualStyleBackColor = true;
+            this.TestB.Click += new System.EventHandler(this.TestB_Click);
+            // 
+            // Memory
+            // 
+            this.Memory.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Memory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Memory.Font = new System.Drawing.Font("굴림", 14F);
+            this.Memory.Location = new System.Drawing.Point(13, 0);
+            this.Memory.Margin = new System.Windows.Forms.Padding(0);
+            this.Memory.Multiline = true;
+            this.Memory.Name = "Memory";
+            this.Memory.Size = new System.Drawing.Size(321, 19);
+            this.Memory.TabIndex = 0;
+            this.Memory.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("굴림", 11F);
+            this.button1.Location = new System.Drawing.Point(273, 147);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(61, 55);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "%";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("굴림", 11F);
+            this.button2.Location = new System.Drawing.Point(275, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(61, 55);
+            this.button2.TabIndex = 19;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 425);
-            this.Controls.Add(this.MemoryScreen);
+            this.ClientSize = new System.Drawing.Size(347, 446);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Memory);
+            this.Controls.Add(this.TestB);
             this.Controls.Add(this.NUM00);
             this.Controls.Add(this.Screen);
             this.Controls.Add(this.Equal);
@@ -350,10 +393,9 @@
             this.Controls.Add(this.NUM0);
             this.Controls.Add(this.NUM2);
             this.Controls.Add(this.NUM1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.MemoryScreen);
             this.Name = "Form1";
             this.Text = "계산기";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,9 +424,12 @@
         private System.Windows.Forms.Button Minus;
         private System.Windows.Forms.Button Equal;
         private System.Windows.Forms.Label Screen;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button NUM00;
         private System.Windows.Forms.Label MemoryScreen;
+        private System.Windows.Forms.Button TestB;
+        private System.Windows.Forms.TextBox Memory;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
