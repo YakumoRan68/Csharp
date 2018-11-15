@@ -56,6 +56,7 @@
             this.Memory = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.overflowed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NUM1
@@ -285,6 +286,7 @@
             this.Equal.TabIndex = 13;
             this.Equal.Text = "=";
             this.Equal.UseVisualStyleBackColor = true;
+            this.Equal.Click += new System.EventHandler(this.Equal_Click);
             // 
             // Screen
             // 
@@ -314,6 +316,7 @@
             this.MemoryScreen.Font = new System.Drawing.Font("굴림", 14F);
             this.MemoryScreen.Location = new System.Drawing.Point(13, 19);
             this.MemoryScreen.Name = "MemoryScreen";
+            this.MemoryScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.MemoryScreen.Size = new System.Drawing.Size(321, 19);
             this.MemoryScreen.TabIndex = 0;
             this.MemoryScreen.Text = "                                             ";
@@ -361,11 +364,23 @@
             this.button2.TabIndex = 19;
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // overflowed
+            // 
+            this.overflowed.AutoSize = true;
+            this.overflowed.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.overflowed.Font = new System.Drawing.Font("굴림", 6F);
+            this.overflowed.Location = new System.Drawing.Point(13, 19);
+            this.overflowed.Name = "overflowed";
+            this.overflowed.Size = new System.Drawing.Size(15, 8);
+            this.overflowed.TabIndex = 20;
+            this.overflowed.Text = "<<";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 446);
+            this.Controls.Add(this.overflowed);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Memory);
@@ -430,6 +445,7 @@
         private System.Windows.Forms.TextBox Memory;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label overflowed;
     }
 }
 

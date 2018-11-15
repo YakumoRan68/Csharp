@@ -10,12 +10,13 @@ using System.Windows.Forms;
 
 namespace _1107 {
     public partial class Form1 : Form {
-        static int buffersize = 100; //필드 이니셜라이저(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
+        static int buffersize = 300; //field initialler(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
         string ScreenBuffer = String.Empty;
         long[] Num = new long[buffersize];
-        decimal[] Fnum = new decimal[buffersize]; //.이 입력됐을경우 모든 연산은 Fnum을 사용
+        decimal[] Fnum = new decimal[buffersize];
         byte[] OpBuffer = new byte[buffersize]; // (무연산자), +, -, *, /
         byte bufferptr = 0; // 연산자의 포인터
+        byte memory_max_width = 35; //메모리 스크린의 너비
         bool IsDot = false; // 실수형인지 정수형인지
 
         public Form1() {
@@ -35,18 +36,26 @@ namespace _1107 {
                 case 4: op = '/'; break;
             }
             int numToTrim = (op + " " + ScreenBuffer + " ").Length;
-            Memory.Text = Memory.Text + ScreenBuffer + " " + op + " ";
-            MemoryScreen.Text = Memory.Text.Substring(Memory.Text.Length > 30 ? Memory.Text.Length - 31 : 0, Memory.Text.Length <= 30 ? Memory.Text.Length : 30);
+            Memory.Text = op + " " + ScreenBuffer + " " + Memory.Text;
+            MemoryScreen.Text = Memory.Text.Substring(0, Memory.Text.Length <= memory_max_width ? Memory.Text.Length : memory_max_width);
         }
 
         private void AddNumToScreen(string op) {
-            ScreenBuffer = ScreenBuffer + op;
-            Screen.Text = ScreenBuffer;
+            if (op == "." || op == "0.") {
+                Screen.Text = op + ScreenBuffer;
+                ScreenBuffer = ScreenBuffer + op;
+            }
+            else {
+                ScreenBuffer = ScreenBuffer + op;
+                Screen.Text = ScreenBuffer;
+            }
         }
 
         private void AddOpToScreen(byte op) {
             if (ScreenBuffer == String.Empty) return;
             OpBuffer[bufferptr] = op;
+            if (IsDot) Fnum[bufferptr] = Convert.ToDecimal(ScreenBuffer);
+            else Num[bufferptr] = Convert.ToInt64(ScreenBuffer);
             MemoryScreenUpdate();
             bufferptr++;
             IsDot = false;
@@ -99,8 +108,8 @@ namespace _1107 {
 
         private void Dot_Click(object sender, EventArgs e) {
             if(!IsDot) {
-                if (ScreenBuffer.Length == 0) AddNumToScreen("0.");
-                else AddNumToScreen(".");
+                if (ScreenBuffer.Length == 0) AddNumToScreen("0");
+                AddNumToScreen(".");
                 IsDot = true;
             }
         }
@@ -153,6 +162,11 @@ namespace _1107 {
 
         private void TestB_Click(object sender, EventArgs e) {
             
+        }
+
+        private void Equal_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
