@@ -45,7 +45,7 @@
             this.Backspace = new System.Windows.Forms.Button();
             this.PM = new System.Windows.Forms.Button();
             this.Multiply = new System.Windows.Forms.Button();
-            this.divide = new System.Windows.Forms.Button();
+            this.Divide = new System.Windows.Forms.Button();
             this.Plus = new System.Windows.Forms.Button();
             this.Minus = new System.Windows.Forms.Button();
             this.Equal = new System.Windows.Forms.Button();
@@ -65,7 +65,7 @@
             this.NUM1.Location = new System.Drawing.Point(12, 269);
             this.NUM1.Name = "NUM1";
             this.NUM1.Size = new System.Drawing.Size(61, 55);
-            this.NUM1.TabIndex = 1;
+            this.NUM1.TabIndex = 16;
             this.NUM1.Text = "1";
             this.NUM1.UseVisualStyleBackColor = true;
             this.NUM1.Click += new System.EventHandler(this.NUM1_Click);
@@ -76,7 +76,7 @@
             this.NUM2.Location = new System.Drawing.Point(72, 269);
             this.NUM2.Name = "NUM2";
             this.NUM2.Size = new System.Drawing.Size(61, 55);
-            this.NUM2.TabIndex = 2;
+            this.NUM2.TabIndex = 17;
             this.NUM2.Text = "2";
             this.NUM2.UseVisualStyleBackColor = true;
             this.NUM2.Click += new System.EventHandler(this.NUM2_Click);
@@ -87,7 +87,7 @@
             this.NUM3.Location = new System.Drawing.Point(132, 269);
             this.NUM3.Name = "NUM3";
             this.NUM3.Size = new System.Drawing.Size(61, 55);
-            this.NUM3.TabIndex = 3;
+            this.NUM3.TabIndex = 18;
             this.NUM3.Text = "3";
             this.NUM3.UseVisualStyleBackColor = true;
             this.NUM3.Click += new System.EventHandler(this.NUM3_Click);
@@ -98,7 +98,7 @@
             this.NUM0.Location = new System.Drawing.Point(12, 330);
             this.NUM0.Name = "NUM0";
             this.NUM0.Size = new System.Drawing.Size(121, 55);
-            this.NUM0.TabIndex = 1;
+            this.NUM0.TabIndex = 21;
             this.NUM0.Text = "0";
             this.NUM0.UseVisualStyleBackColor = true;
             this.NUM0.Click += new System.EventHandler(this.NUM0_Click);
@@ -109,7 +109,7 @@
             this.Dot.Location = new System.Drawing.Point(132, 330);
             this.Dot.Name = "Dot";
             this.Dot.Size = new System.Drawing.Size(61, 55);
-            this.Dot.TabIndex = 2;
+            this.Dot.TabIndex = 22;
             this.Dot.Text = ".";
             this.Dot.UseVisualStyleBackColor = true;
             this.Dot.Click += new System.EventHandler(this.Dot_Click);
@@ -120,7 +120,7 @@
             this.NUM7.Location = new System.Drawing.Point(12, 147);
             this.NUM7.Name = "NUM7";
             this.NUM7.Size = new System.Drawing.Size(61, 55);
-            this.NUM7.TabIndex = 1;
+            this.NUM7.TabIndex = 6;
             this.NUM7.Text = "7";
             this.NUM7.UseVisualStyleBackColor = true;
             this.NUM7.Click += new System.EventHandler(this.NUM7_Click);
@@ -131,7 +131,7 @@
             this.NUM8.Location = new System.Drawing.Point(72, 147);
             this.NUM8.Name = "NUM8";
             this.NUM8.Size = new System.Drawing.Size(61, 55);
-            this.NUM8.TabIndex = 2;
+            this.NUM8.TabIndex = 7;
             this.NUM8.Text = "8";
             this.NUM8.UseVisualStyleBackColor = true;
             this.NUM8.Click += new System.EventHandler(this.NUM8_Click);
@@ -142,7 +142,7 @@
             this.NUM9.Location = new System.Drawing.Point(132, 147);
             this.NUM9.Name = "NUM9";
             this.NUM9.Size = new System.Drawing.Size(61, 55);
-            this.NUM9.TabIndex = 3;
+            this.NUM9.TabIndex = 8;
             this.NUM9.Text = "9";
             this.NUM9.UseVisualStyleBackColor = true;
             this.NUM9.Click += new System.EventHandler(this.NUM9_Click);
@@ -153,7 +153,7 @@
             this.NUM4.Location = new System.Drawing.Point(12, 208);
             this.NUM4.Name = "NUM4";
             this.NUM4.Size = new System.Drawing.Size(61, 55);
-            this.NUM4.TabIndex = 1;
+            this.NUM4.TabIndex = 11;
             this.NUM4.Text = "4";
             this.NUM4.UseVisualStyleBackColor = true;
             this.NUM4.Click += new System.EventHandler(this.NUM4_Click);
@@ -164,7 +164,7 @@
             this.NUM5.Location = new System.Drawing.Point(72, 208);
             this.NUM5.Name = "NUM5";
             this.NUM5.Size = new System.Drawing.Size(61, 55);
-            this.NUM5.TabIndex = 2;
+            this.NUM5.TabIndex = 12;
             this.NUM5.Text = "5";
             this.NUM5.UseVisualStyleBackColor = true;
             this.NUM5.Click += new System.EventHandler(this.NUM5_Click);
@@ -176,7 +176,7 @@
             this.NUM6.Location = new System.Drawing.Point(132, 208);
             this.NUM6.Name = "NUM6";
             this.NUM6.Size = new System.Drawing.Size(61, 55);
-            this.NUM6.TabIndex = 3;
+            this.NUM6.TabIndex = 13;
             this.NUM6.Text = "6";
             this.NUM6.UseVisualStyleBackColor = true;
             this.NUM6.Click += new System.EventHandler(this.NUM6_Click);
@@ -196,7 +196,7 @@
             this.AC.Location = new System.Drawing.Point(132, 86);
             this.AC.Name = "AC";
             this.AC.Size = new System.Drawing.Size(61, 55);
-            this.AC.TabIndex = 5;
+            this.AC.TabIndex = 3;
             this.AC.Text = "C";
             this.AC.UseVisualStyleBackColor = true;
             this.AC.Click += new System.EventHandler(this.AC_Click);
@@ -207,7 +207,7 @@
             this.CE.Location = new System.Drawing.Point(72, 86);
             this.CE.Name = "CE";
             this.CE.Size = new System.Drawing.Size(61, 55);
-            this.CE.TabIndex = 6;
+            this.CE.TabIndex = 2;
             this.CE.Text = "CE";
             this.CE.UseVisualStyleBackColor = true;
             this.CE.Click += new System.EventHandler(this.CE_Click);
@@ -218,7 +218,7 @@
             this.Backspace.Location = new System.Drawing.Point(12, 86);
             this.Backspace.Name = "Backspace";
             this.Backspace.Size = new System.Drawing.Size(61, 55);
-            this.Backspace.TabIndex = 7;
+            this.Backspace.TabIndex = 1;
             this.Backspace.Text = "←";
             this.Backspace.UseVisualStyleBackColor = true;
             this.Backspace.Click += new System.EventHandler(this.Backspace_Click);
@@ -229,7 +229,7 @@
             this.PM.Location = new System.Drawing.Point(208, 86);
             this.PM.Name = "PM";
             this.PM.Size = new System.Drawing.Size(61, 55);
-            this.PM.TabIndex = 12;
+            this.PM.TabIndex = 4;
             this.PM.Text = "±";
             this.PM.UseVisualStyleBackColor = true;
             // 
@@ -239,21 +239,21 @@
             this.Multiply.Location = new System.Drawing.Point(208, 208);
             this.Multiply.Name = "Multiply";
             this.Multiply.Size = new System.Drawing.Size(61, 55);
-            this.Multiply.TabIndex = 9;
+            this.Multiply.TabIndex = 14;
             this.Multiply.Text = "*";
             this.Multiply.UseVisualStyleBackColor = true;
             this.Multiply.Click += new System.EventHandler(this.Multiply_Click);
             // 
-            // divide
+            // Divide
             // 
-            this.divide.Font = new System.Drawing.Font("굴림", 11F);
-            this.divide.Location = new System.Drawing.Point(208, 147);
-            this.divide.Name = "divide";
-            this.divide.Size = new System.Drawing.Size(61, 55);
-            this.divide.TabIndex = 10;
-            this.divide.Text = "/";
-            this.divide.UseVisualStyleBackColor = true;
-            this.divide.Click += new System.EventHandler(this.divide_Click);
+            this.Divide.Font = new System.Drawing.Font("굴림", 11F);
+            this.Divide.Location = new System.Drawing.Point(208, 147);
+            this.Divide.Name = "Divide";
+            this.Divide.Size = new System.Drawing.Size(61, 55);
+            this.Divide.TabIndex = 9;
+            this.Divide.Text = "/";
+            this.Divide.UseVisualStyleBackColor = true;
+            this.Divide.Click += new System.EventHandler(this.Divide_Click);
             // 
             // Plus
             // 
@@ -261,7 +261,7 @@
             this.Plus.Location = new System.Drawing.Point(208, 330);
             this.Plus.Name = "Plus";
             this.Plus.Size = new System.Drawing.Size(61, 55);
-            this.Plus.TabIndex = 8;
+            this.Plus.TabIndex = 23;
             this.Plus.Text = "+";
             this.Plus.UseVisualStyleBackColor = true;
             this.Plus.Click += new System.EventHandler(this.Plus_Click);
@@ -272,7 +272,7 @@
             this.Minus.Location = new System.Drawing.Point(208, 269);
             this.Minus.Name = "Minus";
             this.Minus.Size = new System.Drawing.Size(61, 55);
-            this.Minus.TabIndex = 11;
+            this.Minus.TabIndex = 19;
             this.Minus.Text = "-";
             this.Minus.UseVisualStyleBackColor = true;
             this.Minus.Click += new System.EventHandler(this.Minus_Click);
@@ -280,10 +280,10 @@
             // Equal
             // 
             this.Equal.Font = new System.Drawing.Font("굴림", 11F);
-            this.Equal.Location = new System.Drawing.Point(275, 269);
+            this.Equal.Location = new System.Drawing.Point(273, 269);
             this.Equal.Name = "Equal";
             this.Equal.Size = new System.Drawing.Size(61, 116);
-            this.Equal.TabIndex = 13;
+            this.Equal.TabIndex = 20;
             this.Equal.Text = "=";
             this.Equal.UseVisualStyleBackColor = true;
             this.Equal.Click += new System.EventHandler(this.Equal_Click);
@@ -306,7 +306,7 @@
             this.NUM00.Location = new System.Drawing.Point(132, 391);
             this.NUM00.Name = "NUM00";
             this.NUM00.Size = new System.Drawing.Size(61, 39);
-            this.NUM00.TabIndex = 16;
+            this.NUM00.TabIndex = 24;
             this.NUM00.Text = "00";
             this.NUM00.UseVisualStyleBackColor = true;
             // 
@@ -314,10 +314,10 @@
             // 
             this.MemoryScreen.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MemoryScreen.Font = new System.Drawing.Font("굴림", 14F);
-            this.MemoryScreen.Location = new System.Drawing.Point(13, 19);
+            this.MemoryScreen.Location = new System.Drawing.Point(14, 19);
             this.MemoryScreen.Name = "MemoryScreen";
             this.MemoryScreen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.MemoryScreen.Size = new System.Drawing.Size(321, 19);
+            this.MemoryScreen.Size = new System.Drawing.Size(320, 19);
             this.MemoryScreen.TabIndex = 0;
             this.MemoryScreen.Text = "                                             ";
             // 
@@ -327,7 +327,7 @@
             this.TestB.Location = new System.Drawing.Point(273, 208);
             this.TestB.Name = "TestB";
             this.TestB.Size = new System.Drawing.Size(61, 55);
-            this.TestB.TabIndex = 17;
+            this.TestB.TabIndex = 15;
             this.TestB.Text = "Test";
             this.TestB.UseVisualStyleBackColor = true;
             this.TestB.Click += new System.EventHandler(this.TestB_Click);
@@ -337,11 +337,11 @@
             this.Memory.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Memory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Memory.Font = new System.Drawing.Font("굴림", 14F);
-            this.Memory.Location = new System.Drawing.Point(13, 0);
+            this.Memory.Location = new System.Drawing.Point(14, 0);
             this.Memory.Margin = new System.Windows.Forms.Padding(0);
             this.Memory.Multiline = true;
             this.Memory.Name = "Memory";
-            this.Memory.Size = new System.Drawing.Size(321, 19);
+            this.Memory.Size = new System.Drawing.Size(320, 19);
             this.Memory.TabIndex = 0;
             this.Memory.Visible = false;
             // 
@@ -351,17 +351,17 @@
             this.button1.Location = new System.Drawing.Point(273, 147);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 55);
-            this.button1.TabIndex = 18;
+            this.button1.TabIndex = 10;
             this.button1.Text = "%";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("굴림", 11F);
-            this.button2.Location = new System.Drawing.Point(275, 86);
+            this.button2.Location = new System.Drawing.Point(273, 86);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(61, 55);
-            this.button2.TabIndex = 19;
+            this.button2.TabIndex = 5;
             this.button2.UseVisualStyleBackColor = true;
             // 
             // overflowed
@@ -369,11 +369,12 @@
             this.overflowed.AutoSize = true;
             this.overflowed.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.overflowed.Font = new System.Drawing.Font("굴림", 6F);
-            this.overflowed.Location = new System.Drawing.Point(13, 19);
+            this.overflowed.Location = new System.Drawing.Point(14, 9);
             this.overflowed.Name = "overflowed";
             this.overflowed.Size = new System.Drawing.Size(15, 8);
-            this.overflowed.TabIndex = 20;
+            this.overflowed.TabIndex = 21;
             this.overflowed.Text = "<<";
+            this.overflowed.Visible = false;
             // 
             // Form1
             // 
@@ -390,7 +391,7 @@
             this.Controls.Add(this.Equal);
             this.Controls.Add(this.PM);
             this.Controls.Add(this.Multiply);
-            this.Controls.Add(this.divide);
+            this.Controls.Add(this.Divide);
             this.Controls.Add(this.Plus);
             this.Controls.Add(this.Minus);
             this.Controls.Add(this.Backspace);
@@ -411,6 +412,7 @@
             this.Controls.Add(this.MemoryScreen);
             this.Name = "Form1";
             this.Text = "계산기";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,7 +436,7 @@
         private System.Windows.Forms.Button Backspace;
         private System.Windows.Forms.Button PM;
         private System.Windows.Forms.Button Multiply;
-        private System.Windows.Forms.Button divide;
+        private System.Windows.Forms.Button Divide;
         private System.Windows.Forms.Button Plus;
         private System.Windows.Forms.Button Minus;
         private System.Windows.Forms.Button Equal;
