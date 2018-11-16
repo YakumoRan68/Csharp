@@ -52,13 +52,13 @@ namespace _1107
                 case 4: op = '/'; break;
             }
             int numToTrim = (op + " " + ScreenBuffer + " ").Length;
-            Memory.Text = op + " " + ScreenBuffer + " " + Memory.Text;
-            if (Memory.Text.Length > memory_max_width)
+            MemoryText.Text = op + " " + ScreenBuffer + " " + MemoryText.Text;
+            if (MemoryText.Text.Length > memory_max_width)
             {
-                MemoryScreen.Text = Memory.Text.Substring(0, Memory.Text.Length);
+                MemoryScreen.Text = MemoryText.Text.Substring(0, MemoryText.Text.Length);
                 overflowed.Visible = true;
             }
-            else MemoryScreen.Text = Memory.Text;
+            else MemoryScreen.Text = MemoryText.Text;
 
         }
 
@@ -158,7 +158,7 @@ namespace _1107
             foreach (int i in OpBuffer) OpBuffer[i] = 0;
             IsDot = false;
             Screen.Text = String.Empty;
-            Memory.Text = String.Empty;
+            MemoryText.Text = String.Empty;
             MemoryScreen.Text = String.Empty;
             overflowed.Visible = false;
         }

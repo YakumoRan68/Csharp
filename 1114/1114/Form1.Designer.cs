@@ -53,7 +53,7 @@
             this.NUM00 = new System.Windows.Forms.Button();
             this.MemoryScreen = new System.Windows.Forms.Label();
             this.TestB = new System.Windows.Forms.Button();
-            this.Memory = new System.Windows.Forms.TextBox();
+            this.MemoryText = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.overflowed = new System.Windows.Forms.Label();
@@ -324,26 +324,26 @@
             // TestB
             // 
             this.TestB.Font = new System.Drawing.Font("굴림", 11F);
-            this.TestB.Location = new System.Drawing.Point(273, 208);
+            this.TestB.Location = new System.Drawing.Point(273, 86);
             this.TestB.Name = "TestB";
             this.TestB.Size = new System.Drawing.Size(61, 55);
-            this.TestB.TabIndex = 15;
+            this.TestB.TabIndex = 5;
             this.TestB.Text = "Test";
             this.TestB.UseVisualStyleBackColor = true;
             this.TestB.Click += new System.EventHandler(this.TestB_Click);
             // 
-            // Memory
+            // MemoryText
             // 
-            this.Memory.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Memory.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Memory.Font = new System.Drawing.Font("굴림", 14F);
-            this.Memory.Location = new System.Drawing.Point(14, 0);
-            this.Memory.Margin = new System.Windows.Forms.Padding(0);
-            this.Memory.Multiline = true;
-            this.Memory.Name = "Memory";
-            this.Memory.Size = new System.Drawing.Size(320, 19);
-            this.Memory.TabIndex = 0;
-            this.Memory.Visible = false;
+            this.MemoryText.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.MemoryText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MemoryText.Font = new System.Drawing.Font("굴림", 14F);
+            this.MemoryText.Location = new System.Drawing.Point(14, 0);
+            this.MemoryText.Margin = new System.Windows.Forms.Padding(0);
+            this.MemoryText.Multiline = true;
+            this.MemoryText.Name = "MemoryText";
+            this.MemoryText.Size = new System.Drawing.Size(320, 19);
+            this.MemoryText.TabIndex = 0;
+            this.MemoryText.Visible = false;
             // 
             // button1
             // 
@@ -358,10 +358,10 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("굴림", 11F);
-            this.button2.Location = new System.Drawing.Point(273, 86);
+            this.button2.Location = new System.Drawing.Point(273, 208);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(61, 55);
-            this.button2.TabIndex = 5;
+            this.button2.TabIndex = 15;
             this.button2.UseVisualStyleBackColor = true;
             // 
             // overflowed
@@ -369,7 +369,7 @@
             this.overflowed.AutoSize = true;
             this.overflowed.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.overflowed.Font = new System.Drawing.Font("굴림", 6F);
-            this.overflowed.Location = new System.Drawing.Point(14, 9);
+            this.overflowed.Location = new System.Drawing.Point(14, 11);
             this.overflowed.Name = "overflowed";
             this.overflowed.Size = new System.Drawing.Size(15, 8);
             this.overflowed.TabIndex = 21;
@@ -384,7 +384,7 @@
             this.Controls.Add(this.overflowed);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.Memory);
+            this.Controls.Add(this.MemoryText);
             this.Controls.Add(this.TestB);
             this.Controls.Add(this.NUM00);
             this.Controls.Add(this.Screen);
@@ -444,7 +444,7 @@
         private System.Windows.Forms.Button NUM00;
         private System.Windows.Forms.Label MemoryScreen;
         private System.Windows.Forms.Button TestB;
-        private System.Windows.Forms.TextBox Memory;
+        private System.Windows.Forms.TextBox MemoryText;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label overflowed;
