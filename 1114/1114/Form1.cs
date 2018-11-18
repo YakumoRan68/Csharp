@@ -28,6 +28,7 @@ namespace _1107 {
         byte screen_max_width = 26; //스크린의 너비
         byte memory_max_width = 39; //메모리 스크린의 너비
         bool IsDot = false; // 실수형인지 정수형인지
+        bool IsOp = false; //false : 피연산자, true:연산자
 
         public Form1() {
             InitializeComponent();
@@ -93,32 +94,43 @@ namespace _1107 {
                 case Keys.Subtract: Minus_Click(null, EventArgs.Empty); break;
                 case Keys.Multiply: Multiply_Click(null, EventArgs.Empty); break;
                 case Keys.Divide: Divide_Click(null, EventArgs.Empty); break;
-
-            }
-        }
-        private void TryCalculate(string op) {
-            if (BufferedNum == string.Empty && Memory.Text == string.Empty) { //처음 입력하는 숫자일 경우
-                BufferedNum = Screen.Text;
-                BufferedOp = op;
-            } else {
-                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text);
-                double result = double.Parse(new DataTable().Compute(formula, null).ToString());  // DataTable.Compute를 통해 수식 계산
-                BufferedNum = Convert.ToString(result);
-                BufferedOp = op;
-                Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", BufferedNum);
             }
         }
         private void ReturnResult() {
-            if (BufferedNum == string.Empty || BufferedOp == string.Empty) return; //아무것도 입력 안했는데 누른경우
-            else {
-                label1.Text = string.Format("{0} {1}", BufferedNum.Trim(), BufferedOp.Trim());
-                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text); // 빼기 빼기 issue
-                double result = double.Parse(new DataTable().Compute(formula, null).ToString()); 
-                Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", result);
-                IsDot = false;
-                ScreenBuffer = string.Empty;
-                Memory.Text = string.Empty;
-                MemoryScreen.Text = string.Empty;
+            //label1.Text = string.Format("{0} {1}", BufferedNum.Trim(), BufferedOp.Trim());
+            string formula = string.Empty;
+            double result = 0;
+            if (BufferedNum == string.Empty && BufferedOp == string.Empty) return; //아무것도 입력 안했는데 누른경우
+            else if (ScreenBuffer == String.Empty) {
+                formula = string.Format("{0}{1}{2}", Screen.Text, BufferedOp, BufferedNum);
+            } else {
+                formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text);
+                BufferedNum = IsOp ? BufferedNum : ScreenBuffer;
+            }
+
+            try {//Debug
+                result = double.Parse(new DataTable().Compute(formula, null).ToString());
+            } catch {
+                MessageBox.Show("Error");
+                label1.Text = String.Format("BufferedOp = {0} BufferedNum = {1} IsOp = {2} formula = {3}", BufferedOp, BufferedNum, IsOp, formula);
+            }
+
+            Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", result); // DataTable.Compute를 통해 수식 계산
+            IsDot = false;
+            ScreenBuffer = string.Empty;
+            Memory.Text = string.Empty;
+            MemoryScreen.Text = string.Empty;
+        }
+        private void TryCalculate(string op) {
+            if (BufferedNum == string.Empty && Memory.Text == string.Empty) { //처음 입력하는 연산자일 경우
+                BufferedNum = Screen.Text;
+                BufferedOp = op;
+            } else {
+                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text); 
+                double result = double.Parse(new DataTable().Compute(formula, null).ToString());  
+                BufferedNum = Convert.ToString(result);
+                BufferedOp = op;
+                Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", BufferedNum);
             }
         }
         private void AppendMemoryText(string op, string operand) {
@@ -135,11 +147,11 @@ namespace _1107 {
         private void AddNumToScreen(char operand) {
             ScreenBuffer = ScreenBuffer + operand;
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", ScreenBuffer);
+            IsOp = false;
         }
         private void AddOpToScreen(string op) {
-            label1.Text = string.Format("{0} {1}", BufferedNum.Trim(), BufferedOp.Trim());
             if (ScreenBuffer == string.Empty) {
-                if (Memory.Text == String.Empty && Screen.Text == String.Empty) return;
+                if (Memory.Text == String.Empty && Screen.Text == String.Empty) return; //아무것도 안누르고 눌렀을경우
                 else if (Screen.Text != String.Empty) { //결과값이 나온 상태에서 연산자를 눌렀을 경우
                     BufferedOp = op;
                     BufferedNum = Screen.Text;
@@ -166,6 +178,7 @@ namespace _1107 {
             //}
             //bufferptr++;
             IsDot = false;
+            IsOp = true;
             ScreenBuffer = string.Empty;
         }
         private void NUM0_Click(object sender, EventArgs e) {
@@ -176,6 +189,12 @@ namespace _1107 {
         private void NUM1_Click(object sender, EventArgs e)
         {
             AddNumToScreen('1');
+            //MouseEventArgs eventArgs = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 1);
+            //OnMouseDown(eventArgs);
+            //OnMouseClick(eventArgs);
+            //System.Threading.Thread.Sleep(1);
+            //OnMouseUp(eventArgs);
+            //System.Threading.Thread.Sleep(1);
         }
         private void NUM2_Click(object sender, EventArgs e)
         {
@@ -226,12 +245,14 @@ namespace _1107 {
             MemoryScreen.Text = string.Empty;
             BufferedNum = string.Empty;
             BufferedOp = string.Empty;
+            IsOp = false;
             overflowed.Visible = false;
         }
         private void CE_Click(object sender, EventArgs e) { // 스크린버퍼만 초기화
             IsDot = false;
             ScreenBuffer = string.Empty;
             Screen.Text = string.Empty;
+            IsOp = false;
         }
         private void Backspace_Click(object sender, EventArgs e) {
             //기본적으로 c#에는 안정성문제로 포인터 연산자 사용을 막아두었다. (Unsafe 모드로 디버그 해야 한다고함)

@@ -57,6 +57,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.overflowed = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NUM1
@@ -194,11 +195,10 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 430);
+            this.label1.Location = new System.Drawing.Point(10, 391);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 12);
-            this.label1.TabIndex = 4;
+            this.label1.Size = new System.Drawing.Size(261, 46);
+            this.label1.TabIndex = 999;
             this.label1.Text = "label1";
             // 
             // AC
@@ -322,7 +322,7 @@
             // NUM00
             // 
             this.NUM00.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM00.Location = new System.Drawing.Point(132, 391);
+            this.NUM00.Location = new System.Drawing.Point(277, 391);
             this.NUM00.Name = "NUM00";
             this.NUM00.Size = new System.Drawing.Size(61, 39);
             this.NUM00.TabIndex = 24;
@@ -398,11 +398,22 @@
             this.overflowed.Text = "<<";
             this.overflowed.Visible = false;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(-14, -10);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(54, 48);
+            this.button3.TabIndex = 1000;
+            this.button3.TabStop = false;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 446);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.overflowed);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -470,6 +481,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label overflowed;
+        private System.Windows.Forms.Button button3;
     }
 }
 
