@@ -106,13 +106,18 @@ namespace _1107 {
             if (Screen.Text == string.Empty && ScreenBuffer == string.Empty) return;
             ScreenBuffer = Screen.Text != string.Empty && ScreenBuffer == string.Empty ? Screen.Text.Trim() : ScreenBuffer; //return 버튼을 누르고 바로 버튼을 눌렀을때
             BufferedNum = BufferedOp = string.Empty;
+            Double calculated;
             IsOp = false;
             string FORMEDTEXT = string.Empty;
             switch(op) {
                 case "negate":
                     FORMEDTEXT = ScreenBuffer.Contains("-") ? ScreenBuffer.Remove(0, 1) : ScreenBuffer.Insert(0, "-"); break;
                 case "sqrt":
-                    double calculated = Math.Sqrt(Convert.ToDouble(ScreenBuffer));
+                    calculated = Math.Sqrt(Convert.ToDouble(ScreenBuffer));
+                    IsDot = calculated != Convert.ToInt32(calculated);
+                    FORMEDTEXT = Convert.ToString(calculated); break;
+                case "reciproc":
+                    calculated = Math.Sqrt(Convert.ToDouble(ScreenBuffer));
                     IsDot = calculated != Convert.ToInt32(calculated);
                     FORMEDTEXT = Convert.ToString(calculated); break;
             }
