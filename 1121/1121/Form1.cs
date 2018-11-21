@@ -66,20 +66,35 @@ namespace _1107 {
                     CallMethodByName("NUM"+Convert.ToString((int)e.KeyCode-48)+"_Click"); break;
                 case Keys.NumPad0: case Keys.NumPad1: case Keys.NumPad2: case Keys.NumPad3: case Keys.NumPad4: case Keys.NumPad5: case Keys.NumPad6: case Keys.NumPad7: case Keys.NumPad8: case Keys.NumPad9:
                     CallMethodByName("NUM"+Convert.ToString((int)e.KeyCode-96)+"_Click"); break;
-                case Keys.Decimal: Dot_Click(null, EventArgs.Empty); break;
-                case Keys.Add: Plus_Click(null, EventArgs.Empty); break;
-                case Keys.Subtract: Minus_Click(null, EventArgs.Empty); break;
-                case Keys.Multiply: Multiply_Click(null, EventArgs.Empty); break;
-                case Keys.Divide: Divide_Click(null, EventArgs.Empty); break;
-                case Keys.Back: Backspace_Click(null, EventArgs.Empty); break;
+                case Keys.Decimal:
+                    Dot_Click(null, EventArgs.Empty); break;
+                case Keys.Add:
+                    Plus_Click(null, EventArgs.Empty); break;
+                case Keys.Subtract:
+                    Minus_Click(null, EventArgs.Empty); break;
+                case Keys.Multiply:
+                    Multiply_Click(null, EventArgs.Empty); break;
+                case Keys.Divide:
+                    Divide_Click(null, EventArgs.Empty); break;
+                case Keys.Back:
+                    Backspace_Click(null, EventArgs.Empty); break;
             }
+        }
+        private bool IsInvalidModOp() {
+            try {
+                Convert.ToInt64(Screen.Text);
+            } catch {
+                MessageBox.Show("나머지 연산은 정수끼리만 가능합니다.");
+                return true;
+            }
+            return false;
         }
         private void TryCalculate(string op) {
             if (BufferedNum == string.Empty && Memory.Text == string.Empty) { //처음 입력하는 연산자일 경우
                 BufferedNum = Screen.Text;
                 BufferedOp = op;
             } else {
-                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text); 
+                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text);
                 double result = double.Parse(new DataTable().Compute(formula, null).ToString());  
                 BufferedNum = Convert.ToString(result);
                 BufferedOp = op;
@@ -117,7 +132,7 @@ namespace _1107 {
                     IsDot = calculated != Convert.ToInt32(calculated);
                     FORMEDTEXT = Convert.ToString(calculated); break;
                 case "reciproc":
-                    calculated = Math.Sqrt(Convert.ToDouble(ScreenBuffer));
+                    calculated = 1 / Convert.ToDouble(ScreenBuffer);
                     IsDot = calculated != Convert.ToInt32(calculated);
                     FORMEDTEXT = Convert.ToString(calculated); break;
             }
@@ -125,6 +140,7 @@ namespace _1107 {
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", FORMEDTEXT);
         }
         private void BinaryOperate(string op) {
+            if ((op == "%" || BufferedOp == "%") && IsInvalidModOp()) return;
             if (ScreenBuffer == string.Empty) {
                 if (Memory.Text == String.Empty && Screen.Text == String.Empty) return; //아무것도 안누르고 눌렀을경우
                 else if (Screen.Text != String.Empty) { //결과값이 나온 상태에서 연산자를 눌렀을 경우
@@ -132,7 +148,7 @@ namespace _1107 {
                     BufferedNum = Screen.Text;
                     AppendMemoryText(op, Screen.Text);
                 }
-                else { //Case 피연산자와 연산자를 입력한 상태에서 연산자만 바꾸는 경우
+                else { //피연산자와 연산자를 입력한 상태에서 연산자만 바꾸는 경우
                     Memory.Text = Memory.Text.Remove(Memory.Text.Length - 1);
                     Memory.Text += op;
                     MemoryScreen.Text = MemoryScreen.Text.Remove(MemoryScreen.Text.Length - 1);
@@ -157,7 +173,6 @@ namespace _1107 {
             ScreenBuffer = string.Empty;
         }
         private void ReturnResult() {
-            //label1.Text = string.Format("{0} {1}", BufferedNum.Trim(), BufferedOp.Trim());
             string formula = string.Empty;
             double result = 0;
             if (BufferedNum == string.Empty && BufferedOp == string.Empty) return; //아무것도 입력 안했는데 누른경우
@@ -181,63 +196,26 @@ namespace _1107 {
             Memory.Text = string.Empty;
             MemoryScreen.Text = string.Empty;
         }
-        private void TestB_Click(object sender, EventArgs e) {
-
-        }
         private void NUM0_Click(object sender, EventArgs e) {
             //숫자 0은 1의 자릿수에서 2개이상 쓰이지 않음.
             //소수점 아래에서 위의 조건은 무시됨.
             if (ScreenBuffer.Length != 0) AddNumToScreen('0');
         }
-        private void NUM00_Click(object sender, EventArgs e)
-        {
+        private void NUM00_Click(object sender, EventArgs e) {
             if (ScreenBuffer.Length != 0) {
                 AddNumToScreen('0');
                 AddNumToScreen('0');
             }
         }
-        private void NUM1_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('1');
-            //MouseEventArgs eventArgs = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 1);
-            //OnMouseDown(eventArgs);
-            //OnMouseClick(eventArgs);
-            //System.Threading.Thread.Sleep(1);
-            //OnMouseUp(eventArgs);
-            //System.Threading.Thread.Sleep(1);
-        }
-        private void NUM2_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('2');
-        }
-        private void NUM3_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('3');
-        }
-        private void NUM4_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('4');
-        }
-        private void NUM5_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('5');
-        }
-        private void NUM6_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('6');
-        }
-        private void NUM7_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('7');
-        }
-        private void NUM8_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('8');
-        }
-        private void NUM9_Click(object sender, EventArgs e)
-        {
-            AddNumToScreen('9');
-        }
+        private void NUM1_Click(object sender, EventArgs e) => AddNumToScreen('1');
+        private void NUM2_Click(object sender, EventArgs e) => AddNumToScreen('2');
+        private void NUM3_Click(object sender, EventArgs e) => AddNumToScreen('3');
+        private void NUM4_Click(object sender, EventArgs e) => AddNumToScreen('4');
+        private void NUM5_Click(object sender, EventArgs e) => AddNumToScreen('5');
+        private void NUM6_Click(object sender, EventArgs e) => AddNumToScreen('6');
+        private void NUM7_Click(object sender, EventArgs e) => AddNumToScreen('7');
+        private void NUM8_Click(object sender, EventArgs e) => AddNumToScreen('8');
+        private void NUM9_Click(object sender, EventArgs e) => AddNumToScreen('9');
         private void Dot_Click(object sender, EventArgs e) {
             if (!IsDot) {
                 if (ScreenBuffer.Length == 0) AddNumToScreen('0');
@@ -245,6 +223,16 @@ namespace _1107 {
                 IsDot = true;
             }
         }
+        private void Negate_Click(object sender, EventArgs e) => UnaryOperate("negate");
+        private void Root_Click(object sender, EventArgs e) => UnaryOperate("sqrt");
+        private void Reciprocal_Click(object sender, EventArgs e) => UnaryOperate("reciproc");
+        private void Percent_Click(object sender, EventArgs e) => UnaryOperate("percent");
+        private void Plus_Click(object sender, EventArgs e) => BinaryOperate("+");
+        private void Minus_Click(object sender, EventArgs e) => BinaryOperate("-");
+        private void Multiply_Click(object sender, EventArgs e) => BinaryOperate("*");
+        private void Divide_Click(object sender, EventArgs e) => BinaryOperate("/");
+        private void Mod_Click(object sender, EventArgs e) => BinaryOperate("%");
+        private void Equal_Click(object sender, EventArgs e) => ReturnResult();
         private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
             foreach (int i in Num) Num[i] = 0;
             foreach (int i in Fnum) Fnum[i] = 0;
@@ -273,27 +261,6 @@ namespace _1107 {
             ScreenBuffer = ScreenBuffer.Remove(ScreenBuffer.Length - 1, 1);
             Screen.Text = ScreenBuffer;
         }
-        private void Plus_Click(object sender, EventArgs e) {
-            BinaryOperate("+");
-        }
-        private void Minus_Click(object sender, EventArgs e) {
-            BinaryOperate("-");
-        }
-        private void Multiply_Click(object sender, EventArgs e) {
-            BinaryOperate("*");
-        }
-        private void Divide_Click(object sender, EventArgs e) {
-            BinaryOperate("/");
-        }
-        private void Equal_Click(object sender, EventArgs e) {
-            ReturnResult();
-        }
-        private void Mod_Click(object sender, EventArgs e) {
-            BinaryOperate("%");
-        }
-        private void PM_Click(object sender, EventArgs e) {
-            UnaryOperate("negate");
-        }
         private void 공학용계산기ToolStripMenuItem_Click(object sender, EventArgs e) {
             form_2 = new _1121.Form2();
             form_2.Owner = this;
@@ -302,13 +269,6 @@ namespace _1107 {
         }
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e) {
             Close();
-        }
-
-        private void Root_Click(object sender, EventArgs e) {
-            UnaryOperate("sqrt");
-        }
-        private void Reciprocal_Click(object sender, EventArgs e) {
-            UnaryOperate("reciproc");
         }
     }
 }
