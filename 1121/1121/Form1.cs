@@ -121,7 +121,7 @@ namespace _1107 {
             if (Screen.Text == string.Empty && ScreenBuffer == string.Empty) return;
             ScreenBuffer = Screen.Text != string.Empty && ScreenBuffer == string.Empty ? Screen.Text.Trim() : ScreenBuffer; //return 버튼을 누르고 바로 버튼을 눌렀을때
             BufferedNum = BufferedOp = string.Empty;
-            Double calculated;
+            double calculated;
             IsOp = false;
             string FORMEDTEXT = string.Empty;
             switch(op) {
@@ -176,7 +176,7 @@ namespace _1107 {
             string formula = string.Empty;
             double result = 0;
             if (BufferedNum == string.Empty && BufferedOp == string.Empty) return; //아무것도 입력 안했는데 누른경우
-            else if (ScreenBuffer == String.Empty) {
+            else if (ScreenBuffer == string.Empty) {
                 formula = string.Format("{0}{1}{2}", Screen.Text, BufferedOp, BufferedNum);
             } else {
                 formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text);
@@ -259,7 +259,7 @@ namespace _1107 {
             if (ScreenBuffer.Length == 0) return;
             if (ScreenBuffer[ScreenBuffer.Length - 1] == '.') IsDot = false;
             ScreenBuffer = ScreenBuffer.Remove(ScreenBuffer.Length - 1, 1);
-            Screen.Text = ScreenBuffer;
+            Screen.Text = Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", ScreenBuffer);
         }
         private void 공학용계산기ToolStripMenuItem_Click(object sender, EventArgs e) {
             form_2 = new _1121.Form2();
