@@ -39,10 +39,10 @@
             this.복사ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.붙여넣기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.Reciprocal = new System.Windows.Forms.Button();
+            this.Reciproc = new System.Windows.Forms.Button();
             this.Screen = new System.Windows.Forms.Label();
             this.Equal = new System.Windows.Forms.Button();
-            this.PM = new System.Windows.Forms.Button();
+            this.Negate = new System.Windows.Forms.Button();
             this.Multiply = new System.Windows.Forms.Button();
             this.Divide = new System.Windows.Forms.Button();
             this.Plus = new System.Windows.Forms.Button();
@@ -78,7 +78,7 @@
             this.overflowed.AutoSize = true;
             this.overflowed.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.overflowed.Font = new System.Drawing.Font("굴림", 6F);
-            this.overflowed.Location = new System.Drawing.Point(12, 47);
+            this.overflowed.Location = new System.Drawing.Point(22, 53);
             this.overflowed.Name = "overflowed";
             this.overflowed.Size = new System.Drawing.Size(15, 8);
             this.overflowed.TabIndex = 1026;
@@ -88,7 +88,7 @@
             // Root
             // 
             this.Root.Font = new System.Drawing.Font("굴림", 11F);
-            this.Root.Location = new System.Drawing.Point(251, 236);
+            this.Root.Location = new System.Drawing.Point(249, 226);
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(61, 55);
             this.Root.TabIndex = 1027;
@@ -99,7 +99,7 @@
             // Mod
             // 
             this.Mod.Font = new System.Drawing.Font("굴림", 11F);
-            this.Mod.Location = new System.Drawing.Point(251, 182);
+            this.Mod.Location = new System.Drawing.Point(249, 172);
             this.Mod.Name = "Mod";
             this.Mod.Size = new System.Drawing.Size(61, 55);
             this.Mod.TabIndex = 1025;
@@ -112,7 +112,7 @@
             this.Memory.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Memory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Memory.Font = new System.Drawing.Font("굴림", 14F);
-            this.Memory.Location = new System.Drawing.Point(11, 36);
+            this.Memory.Location = new System.Drawing.Point(9, 42);
             this.Memory.Margin = new System.Windows.Forms.Padding(0);
             this.Memory.Multiline = true;
             this.Memory.Name = "Memory";
@@ -123,7 +123,7 @@
             // Percent
             // 
             this.Percent.Font = new System.Drawing.Font("굴림", 11F);
-            this.Percent.Location = new System.Drawing.Point(251, 128);
+            this.Percent.Location = new System.Drawing.Point(249, 118);
             this.Percent.Name = "Percent";
             this.Percent.Size = new System.Drawing.Size(61, 55);
             this.Percent.TabIndex = 1029;
@@ -134,7 +134,7 @@
             // NUM00
             // 
             this.NUM00.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM00.Location = new System.Drawing.Point(191, 399);
+            this.NUM00.Location = new System.Drawing.Point(189, 388);
             this.NUM00.Name = "NUM00";
             this.NUM00.Size = new System.Drawing.Size(61, 55);
             this.NUM00.TabIndex = 1028;
@@ -156,27 +156,25 @@
             // 일반용계산기ToolStripMenuItem
             // 
             this.일반용계산기ToolStripMenuItem.Name = "일반용계산기ToolStripMenuItem";
-            this.일반용계산기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.일반용계산기ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.일반용계산기ToolStripMenuItem.Text = "일반용 계산기";
-            this.일반용계산기ToolStripMenuItem.Click += new System.EventHandler(this.일반용계산기ToolStripMenuItem_Click);
             // 
             // 공학용계산기ToolStripMenuItem
             // 
             this.공학용계산기ToolStripMenuItem.Name = "공학용계산기ToolStripMenuItem";
-            this.공학용계산기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.공학용계산기ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.공학용계산기ToolStripMenuItem.Text = "공학용 계산기";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(147, 6);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.종료ToolStripMenuItem.Text = "종료";
-            this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
             // 정보ToolStripMenuItem
             // 
@@ -206,23 +204,23 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(135, 6);
             // 
-            // Reciprocal
+            // Reciproc
             // 
-            this.Reciprocal.Font = new System.Drawing.Font("굴림", 11F);
-            this.Reciprocal.Location = new System.Drawing.Point(251, 290);
-            this.Reciprocal.Name = "Reciprocal";
-            this.Reciprocal.Size = new System.Drawing.Size(61, 55);
-            this.Reciprocal.TabIndex = 1032;
-            this.Reciprocal.TabStop = false;
-            this.Reciprocal.Text = "1/x";
-            this.Reciprocal.UseVisualStyleBackColor = true;
+            this.Reciproc.Font = new System.Drawing.Font("굴림", 11F);
+            this.Reciproc.Location = new System.Drawing.Point(249, 280);
+            this.Reciproc.Name = "Reciproc";
+            this.Reciproc.Size = new System.Drawing.Size(61, 55);
+            this.Reciproc.TabIndex = 1032;
+            this.Reciproc.TabStop = false;
+            this.Reciproc.Text = "1/x";
+            this.Reciproc.UseVisualStyleBackColor = true;
             // 
             // Screen
             // 
             this.Screen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Screen.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Screen.Font = new System.Drawing.Font("Consolas", 16F);
-            this.Screen.Location = new System.Drawing.Point(11, 74);
+            this.Screen.Location = new System.Drawing.Point(9, 80);
             this.Screen.Name = "Screen";
             this.Screen.Size = new System.Drawing.Size(301, 25);
             this.Screen.TabIndex = 1004;
@@ -231,29 +229,29 @@
             // Equal
             // 
             this.Equal.Font = new System.Drawing.Font("굴림", 11F);
-            this.Equal.Location = new System.Drawing.Point(251, 344);
+            this.Equal.Location = new System.Drawing.Point(249, 334);
             this.Equal.Name = "Equal";
-            this.Equal.Size = new System.Drawing.Size(61, 110);
+            this.Equal.Size = new System.Drawing.Size(61, 109);
             this.Equal.TabIndex = 1023;
             this.Equal.TabStop = false;
             this.Equal.Text = "=";
             this.Equal.UseVisualStyleBackColor = true;
             // 
-            // PM
+            // Negate
             // 
-            this.PM.Font = new System.Drawing.Font("굴림", 11F);
-            this.PM.Location = new System.Drawing.Point(191, 128);
-            this.PM.Name = "PM";
-            this.PM.Size = new System.Drawing.Size(61, 55);
-            this.PM.TabIndex = 1024;
-            this.PM.TabStop = false;
-            this.PM.Text = "±";
-            this.PM.UseVisualStyleBackColor = true;
+            this.Negate.Font = new System.Drawing.Font("굴림", 11F);
+            this.Negate.Location = new System.Drawing.Point(189, 118);
+            this.Negate.Name = "Negate";
+            this.Negate.Size = new System.Drawing.Size(61, 55);
+            this.Negate.TabIndex = 1024;
+            this.Negate.TabStop = false;
+            this.Negate.Text = "±";
+            this.Negate.UseVisualStyleBackColor = true;
             // 
             // Multiply
             // 
             this.Multiply.Font = new System.Drawing.Font("굴림", 11F);
-            this.Multiply.Location = new System.Drawing.Point(191, 236);
+            this.Multiply.Location = new System.Drawing.Point(189, 226);
             this.Multiply.Name = "Multiply";
             this.Multiply.Size = new System.Drawing.Size(61, 55);
             this.Multiply.TabIndex = 1018;
@@ -264,7 +262,7 @@
             // Divide
             // 
             this.Divide.Font = new System.Drawing.Font("굴림", 11F);
-            this.Divide.Location = new System.Drawing.Point(191, 182);
+            this.Divide.Location = new System.Drawing.Point(189, 172);
             this.Divide.Name = "Divide";
             this.Divide.Size = new System.Drawing.Size(61, 55);
             this.Divide.TabIndex = 1019;
@@ -275,7 +273,7 @@
             // Plus
             // 
             this.Plus.Font = new System.Drawing.Font("굴림", 11F);
-            this.Plus.Location = new System.Drawing.Point(191, 344);
+            this.Plus.Location = new System.Drawing.Point(189, 334);
             this.Plus.Name = "Plus";
             this.Plus.Size = new System.Drawing.Size(61, 55);
             this.Plus.TabIndex = 1016;
@@ -286,7 +284,7 @@
             // Minus
             // 
             this.Minus.Font = new System.Drawing.Font("굴림", 11F);
-            this.Minus.Location = new System.Drawing.Point(191, 290);
+            this.Minus.Location = new System.Drawing.Point(189, 280);
             this.Minus.Name = "Minus";
             this.Minus.Size = new System.Drawing.Size(61, 55);
             this.Minus.TabIndex = 1017;
@@ -297,7 +295,7 @@
             // Backspace
             // 
             this.Backspace.Font = new System.Drawing.Font("굴림", 11F);
-            this.Backspace.Location = new System.Drawing.Point(131, 183);
+            this.Backspace.Location = new System.Drawing.Point(129, 172);
             this.Backspace.Name = "Backspace";
             this.Backspace.Size = new System.Drawing.Size(61, 55);
             this.Backspace.TabIndex = 1020;
@@ -308,7 +306,7 @@
             // CE
             // 
             this.CE.Font = new System.Drawing.Font("굴림", 11F);
-            this.CE.Location = new System.Drawing.Point(11, 183);
+            this.CE.Location = new System.Drawing.Point(9, 172);
             this.CE.Name = "CE";
             this.CE.Size = new System.Drawing.Size(61, 55);
             this.CE.TabIndex = 1022;
@@ -319,7 +317,7 @@
             // AC
             // 
             this.AC.Font = new System.Drawing.Font("굴림", 11F);
-            this.AC.Location = new System.Drawing.Point(71, 183);
+            this.AC.Location = new System.Drawing.Point(69, 172);
             this.AC.Name = "AC";
             this.AC.Size = new System.Drawing.Size(61, 55);
             this.AC.TabIndex = 1021;
@@ -329,7 +327,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(9, 102);
+            this.label1.Location = new System.Drawing.Point(6, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 46);
             this.label1.TabIndex = 1030;
@@ -339,7 +337,7 @@
             // 
             this.NUM6.Cursor = System.Windows.Forms.Cursors.Default;
             this.NUM6.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM6.Location = new System.Drawing.Point(131, 291);
+            this.NUM6.Location = new System.Drawing.Point(129, 280);
             this.NUM6.Name = "NUM6";
             this.NUM6.Size = new System.Drawing.Size(61, 55);
             this.NUM6.TabIndex = 1012;
@@ -350,7 +348,7 @@
             // NUM5
             // 
             this.NUM5.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM5.Location = new System.Drawing.Point(71, 291);
+            this.NUM5.Location = new System.Drawing.Point(69, 280);
             this.NUM5.Name = "NUM5";
             this.NUM5.Size = new System.Drawing.Size(61, 55);
             this.NUM5.TabIndex = 1011;
@@ -361,7 +359,7 @@
             // NUM9
             // 
             this.NUM9.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM9.Location = new System.Drawing.Point(131, 237);
+            this.NUM9.Location = new System.Drawing.Point(129, 226);
             this.NUM9.Name = "NUM9";
             this.NUM9.Size = new System.Drawing.Size(61, 55);
             this.NUM9.TabIndex = 1015;
@@ -372,7 +370,7 @@
             // NUM8
             // 
             this.NUM8.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM8.Location = new System.Drawing.Point(71, 237);
+            this.NUM8.Location = new System.Drawing.Point(69, 226);
             this.NUM8.Name = "NUM8";
             this.NUM8.Size = new System.Drawing.Size(61, 55);
             this.NUM8.TabIndex = 1014;
@@ -383,7 +381,7 @@
             // NUM4
             // 
             this.NUM4.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM4.Location = new System.Drawing.Point(11, 291);
+            this.NUM4.Location = new System.Drawing.Point(9, 280);
             this.NUM4.Name = "NUM4";
             this.NUM4.Size = new System.Drawing.Size(61, 55);
             this.NUM4.TabIndex = 1010;
@@ -394,7 +392,7 @@
             // Dot
             // 
             this.Dot.Font = new System.Drawing.Font("굴림", 11F);
-            this.Dot.Location = new System.Drawing.Point(131, 399);
+            this.Dot.Location = new System.Drawing.Point(129, 388);
             this.Dot.Name = "Dot";
             this.Dot.Size = new System.Drawing.Size(61, 55);
             this.Dot.TabIndex = 1006;
@@ -405,7 +403,7 @@
             // NUM7
             // 
             this.NUM7.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM7.Location = new System.Drawing.Point(11, 237);
+            this.NUM7.Location = new System.Drawing.Point(9, 226);
             this.NUM7.Name = "NUM7";
             this.NUM7.Size = new System.Drawing.Size(61, 55);
             this.NUM7.TabIndex = 1013;
@@ -416,7 +414,7 @@
             // NUM3
             // 
             this.NUM3.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM3.Location = new System.Drawing.Point(131, 345);
+            this.NUM3.Location = new System.Drawing.Point(129, 334);
             this.NUM3.Name = "NUM3";
             this.NUM3.Size = new System.Drawing.Size(61, 55);
             this.NUM3.TabIndex = 1009;
@@ -427,7 +425,7 @@
             // NUM0
             // 
             this.NUM0.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM0.Location = new System.Drawing.Point(11, 399);
+            this.NUM0.Location = new System.Drawing.Point(9, 388);
             this.NUM0.Name = "NUM0";
             this.NUM0.Size = new System.Drawing.Size(121, 55);
             this.NUM0.TabIndex = 1003;
@@ -438,7 +436,7 @@
             // NUM2
             // 
             this.NUM2.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM2.Location = new System.Drawing.Point(71, 345);
+            this.NUM2.Location = new System.Drawing.Point(69, 334);
             this.NUM2.Name = "NUM2";
             this.NUM2.Size = new System.Drawing.Size(61, 55);
             this.NUM2.TabIndex = 1008;
@@ -449,7 +447,7 @@
             // NUM1
             // 
             this.NUM1.Font = new System.Drawing.Font("굴림", 11F);
-            this.NUM1.Location = new System.Drawing.Point(11, 345);
+            this.NUM1.Location = new System.Drawing.Point(9, 334);
             this.NUM1.Name = "NUM1";
             this.NUM1.Size = new System.Drawing.Size(61, 55);
             this.NUM1.TabIndex = 1007;
@@ -461,7 +459,7 @@
             // 
             this.MemoryScreen.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MemoryScreen.Font = new System.Drawing.Font("Consolas", 11F);
-            this.MemoryScreen.Location = new System.Drawing.Point(11, 55);
+            this.MemoryScreen.Location = new System.Drawing.Point(9, 61);
             this.MemoryScreen.Name = "MemoryScreen";
             this.MemoryScreen.Size = new System.Drawing.Size(301, 19);
             this.MemoryScreen.TabIndex = 1005;
@@ -473,7 +471,7 @@
             this.정보ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(329, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(324, 24);
             this.menuStrip1.TabIndex = 1031;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -481,17 +479,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 478);
+            this.ClientSize = new System.Drawing.Size(324, 461);
             this.Controls.Add(this.overflowed);
             this.Controls.Add(this.Root);
             this.Controls.Add(this.Mod);
             this.Controls.Add(this.Memory);
             this.Controls.Add(this.Percent);
             this.Controls.Add(this.NUM00);
-            this.Controls.Add(this.Reciprocal);
+            this.Controls.Add(this.Reciproc);
             this.Controls.Add(this.Screen);
             this.Controls.Add(this.Equal);
-            this.Controls.Add(this.PM);
+            this.Controls.Add(this.Negate);
             this.Controls.Add(this.Multiply);
             this.Controls.Add(this.Divide);
             this.Controls.Add(this.Plus);
@@ -516,6 +514,8 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -541,10 +541,10 @@
         private System.Windows.Forms.ToolStripMenuItem 복사ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 붙여넣기ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.Button Reciprocal;
+        private System.Windows.Forms.Button Reciproc;
         private System.Windows.Forms.Label Screen;
         private System.Windows.Forms.Button Equal;
-        private System.Windows.Forms.Button PM;
+        private System.Windows.Forms.Button Negate;
         private System.Windows.Forms.Button Multiply;
         private System.Windows.Forms.Button Divide;
         private System.Windows.Forms.Button Plus;

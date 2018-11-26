@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /*
@@ -19,11 +20,13 @@ namespace _1107 {
     public partial class Form1 : Form {
         private _1121.Form2 form_2;
         static int buffersize = 300; //field initialler(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
+        string TheFormula = string.Empty;
         string ScreenBuffer = string.Empty; //raw string
         string BufferedNum = string.Empty;
         string BufferedOp = string.Empty;
         double[] Fnum = new double[buffersize];
         long[] Num = new long[buffersize];
+        byte tick = 0;
         byte screen_max_width = 24; //스크린의 너비
         byte memory_max_width = 36; //메모리 스크린의 너비
         bool IsDot = false; // 실수형인지 정수형인지
@@ -89,13 +92,39 @@ namespace _1107 {
             }
             return false;
         }
+        private int ValidateBracket() {
+            int NumOpenBracket = 0;
+            foreach (char c in TheFormula) if (c == '(') NumOpenBracket++;
+
+            int NumCloseBracket = 0;
+            foreach (char c in TheFormula) if (c == ')') NumCloseBracket++;
+
+            return NumOpenBracket - NumCloseBracket;
+        }
+        private void WriteFormula(string input) {
+            //인수분해 모드일땐 숫자 뒤에 (입력이 오면 *(로 바꿔 넣는다
+            bool IsFactorize = false; //temp
+
+            switch(input) {
+                case "(": TheFormula = IsFactorize ? input + TheFormula : TheFormula + "*" + "("; break;
+                case ")": if (ValidateBracket() <= 0) return; goto default; //여기선 goto써도 합법
+                default: TheFormula = TheFormula + input; break;
+            }
+        }
+        private string GetFormula() { //수식에 적혀있는 닫히지 않은 괄호들을 전부 닫고 호출한다.
+            string _FORMED = TheFormula;
+            int numbra = ValidateBracket();
+
+            if (numbra < 0) for (int i = 1; i <= numbra; i++) TheFormula = TheFormula + ")";;
+            return _FORMED;
+        }
         private void TryCalculate(string op) {
             if (BufferedNum == string.Empty && Memory.Text == string.Empty) { //처음 입력하는 연산자일 경우
                 BufferedNum = Screen.Text;
                 BufferedOp = op;
             } else {
                 string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text);
-                double result = double.Parse(new DataTable().Compute(formula, null).ToString());  
+                double result = double.Parse(new DataTable().Compute(formula, null).ToString());
                 BufferedNum = Convert.ToString(result);
                 BufferedOp = op;
                 Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", BufferedNum);
@@ -143,12 +172,7 @@ namespace _1107 {
             if ((op == "%" || BufferedOp == "%") && IsInvalidModOp()) return;
             if (ScreenBuffer == string.Empty) {
                 if (Memory.Text == String.Empty && Screen.Text == String.Empty) return; //아무것도 안누르고 눌렀을경우
-                else if (Screen.Text != String.Empty) { //결과값이 나온 상태에서 연산자를 눌렀을 경우
-                    BufferedOp = op;
-                    BufferedNum = Screen.Text;
-                    AppendMemoryText(op, Screen.Text);
-                }
-                else { //피연산자와 연산자를 입력한 상태에서 연산자만 바꾸는 경우
+                else if (Screen.Text != String.Empty && IsOp) { //피연산자와 연산자를 입력한 상태에서 연산자만 바꾸는 경우
                     Memory.Text = Memory.Text.Remove(Memory.Text.Length - 1);
                     Memory.Text += op;
                     MemoryScreen.Text = MemoryScreen.Text.Remove(MemoryScreen.Text.Length - 1);
@@ -156,18 +180,15 @@ namespace _1107 {
                     BufferedOp = op;
                     ScreenBuffer = string.Empty;
                 }
+                else { //결과값이 나온 상태에서 연산자를 눌렀을 경우
+                    BufferedOp = op;
+                    BufferedNum = Screen.Text;
+                    AppendMemoryText(op, Screen.Text.Trim());
+                }
             } else {
+                AppendMemoryText(op, Screen.Text.Trim());
                 TryCalculate(op);
-                AppendMemoryText(op, Screen.Text);
             }
-            //OpBuffer[bufferptr] = op; 괄호계산에 필요함
-            //switch(OpBuffer[bufferptr]) {
-            //    case 1: op = '+'; break;
-            //    case 2: op = '-'; break;
-            //    case 3: op = '*'; break;
-            //    case 4: op = '/'; break;
-            //}
-            //bufferptr++;
             IsDot = false;
             IsOp = true;
             ScreenBuffer = string.Empty;
@@ -183,12 +204,7 @@ namespace _1107 {
                 BufferedNum = IsOp ? BufferedNum : ScreenBuffer;
             }
 
-            try {//Debug
-                result = double.Parse(new DataTable().Compute(formula, null).ToString());
-            } catch {
-                MessageBox.Show("Error");
-                label1.Text = String.Format("BufferedOp = {0} BufferedNum = {1} IsOp = {2} formula = {3}", BufferedOp, BufferedNum, IsOp, formula);
-            }
+            result = double.Parse(new DataTable().Compute(formula, null).ToString());
 
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", result); // DataTable.Compute를 통해 수식 계산
             IsDot = false;
@@ -243,6 +259,7 @@ namespace _1107 {
             MemoryScreen.Text = string.Empty;
             BufferedNum = string.Empty;
             BufferedOp = string.Empty;
+            TheFormula = string.Empty;
             IsOp = false;
             overflowed.Visible = false;
         }
@@ -265,10 +282,15 @@ namespace _1107 {
             form_2 = new _1121.Form2();
             form_2.Owner = this;
             form_2.Show();
+            form_2.Location = this.Location;
+            
             Hide();
         }
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e) {
             Close();
+        }
+        private void timer1_Tick(object sender, EventArgs e) {
+
         }
     }
 }

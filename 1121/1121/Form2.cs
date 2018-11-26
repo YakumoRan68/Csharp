@@ -22,5 +22,13 @@ namespace _1121 {
             Owner.Close();
             Close();
         }
+
+        private void Form2_Load(object sender, EventArgs e) {
+
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e) {
+            종료ToolStripMenuItem_Click(null, EventArgs.Empty);
+        }
     }
 }
