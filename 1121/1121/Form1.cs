@@ -51,6 +51,42 @@ namespace _1107 {
                     if (ctr.GetType() == typeof(Button)) ctr.TabStop = true;
                 }
             }
+
+            if (keyData == (Keys.Shift | Keys.D9)) {
+                BracketOpen.PerformClick();
+                return true;
+            }
+
+            if (keyData == (Keys.Shift | Keys.D0)) {
+                BracketClose.PerformClick();
+                return true;
+            }
+
+            if (keyData == (Keys.Shift | Keys.D5)) {
+                Mod.PerformClick();
+                return true;
+            }
+
+            if (keyData == (Keys.Shift | Keys.D6)) {
+                Power.PerformClick();
+                return true;
+            }
+
+            if (keyData == (Keys.Shift | Keys.D8)) {
+                Multiply.PerformClick();
+                return true;
+            }
+
+            if (keyData == (Keys.Shift | Keys.OemMinus)) {
+                Minus.PerformClick();
+                return true;
+            }
+
+            if (keyData == (Keys.Shift | Keys.Oemplus)) {
+                Equal.PerformClick();
+                return true;
+            }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
         void CallMethodByName(string name) {
@@ -58,12 +94,11 @@ namespace _1107 {
             MethodInfo method = t.GetMethod(name, BindingFlags.NonPublic|BindingFlags.Public|BindingFlags.Instance);
             //메서드(함수)를 이름으로 검색하되, 지정된 바인드 플래그 형식으로 검색함.
             //바인드 플래그가 없는 버전은 Public 메소드 밖에 검색하지 않음.
-            // | 연산자 : 기본적으로 || 와 비슷함. A | B; A의 성질이 있거나, B의 성질이 있는 플래그들을 포함시킴.
+            // | 연산자 : 기본적으로 || 와 비슷함. A | B; A의 성질이 있으면서, B의 성질이 있는 플래그들을 포함시킴.
             method.Invoke(this, new object[] { null, EventArgs.Empty });
             //메서드 호출함수. 해당 인스턴스에서 어규먼트(sender, e)를 가진 채로 호출함.
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e) {
-            //MessageBox.Show(Convert.ToString(e.KeyCode));
             switch (e.KeyCode) {
                 case Keys.D0: case Keys.D1: case Keys.D2: case Keys.D3: case Keys.D4: case Keys.D5: case Keys.D6: case Keys.D7: case Keys.D8: case Keys.D9:
                     CallMethodByName("NUM"+Convert.ToString((int)e.KeyCode-48)+"_Click"); break;
@@ -71,12 +106,14 @@ namespace _1107 {
                     CallMethodByName("NUM"+Convert.ToString((int)e.KeyCode-96)+"_Click"); break;
                 case Keys.Decimal:
                     Dot_Click(null, EventArgs.Empty); break;
+                case Keys.Oemplus:
                 case Keys.Add:
                     Plus_Click(null, EventArgs.Empty); break;
                 case Keys.Subtract:
                     Minus_Click(null, EventArgs.Empty); break;
                 case Keys.Multiply:
                     Multiply_Click(null, EventArgs.Empty); break;
+                case Keys.OemQuestion:
                 case Keys.Divide:
                     Divide_Click(null, EventArgs.Empty); break;
                 case Keys.Back:
@@ -106,7 +143,7 @@ namespace _1107 {
             bool IsFactorize = false; //temp
 
             switch(input) {
-                case "(": TheFormula = IsFactorize ? input + TheFormula : TheFormula + "*" + "("; break;
+                case "(": TheFormula = IsFactorize ? TheFormula + "*" + "(" : input + TheFormula; break;
                 case ")": if (ValidateBracket() <= 0) return; goto default; //여기선 goto써도 합법
                 default: TheFormula = TheFormula + input; break;
             }
@@ -115,6 +152,7 @@ namespace _1107 {
             string _FORMED = TheFormula;
             int numbra = ValidateBracket();
 
+            if (!char.IsNumber(TheFormula[TheFormula.Length - 1])) TheFormula = TheFormula.Remove(TheFormula.Length - 1);
             if (numbra < 0) for (int i = 1; i <= numbra; i++) TheFormula = TheFormula + ")";;
             return _FORMED;
         }
@@ -123,7 +161,8 @@ namespace _1107 {
                 BufferedNum = Screen.Text;
                 BufferedOp = op;
             } else {
-                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, Screen.Text);
+                if (ValidateBracket() != 0) return;
+                string formula = string.Format("{0}{1}{2}", BufferedNum, BufferedOp, TheFormula);
                 double result = double.Parse(new DataTable().Compute(formula, null).ToString());
                 BufferedNum = Convert.ToString(result);
                 BufferedOp = op;
@@ -141,10 +180,16 @@ namespace _1107 {
             }
             else MemoryScreen.Text = string.Format("{0," + Convert.ToString(memory_max_width) + "}", Memory.Text);
         }
-        private void AddNumToScreen(char operand) {
+        private void AddOperandToScreen(char operand) {
+            WriteFormula(Convert.ToString(operand));
             ScreenBuffer = ScreenBuffer + operand;
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", ScreenBuffer);
             IsOp = false;
+        }
+        private void AddBracketToScreen(char bracket) {
+            WriteFormula(Convert.ToString(bracket));
+            ScreenBuffer = TheFormula;
+            Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", TheFormula);
         }
         private void UnaryOperate(string op) {
             if (Screen.Text == string.Empty && ScreenBuffer == string.Empty) return;
@@ -171,12 +216,14 @@ namespace _1107 {
         private void BinaryOperate(string op) {
             if ((op == "%" || BufferedOp == "%") && IsInvalidModOp()) return;
             if (ScreenBuffer == string.Empty) {
-                if (Memory.Text == String.Empty && Screen.Text == String.Empty) return; //아무것도 안누르고 눌렀을경우
-                else if (Screen.Text != String.Empty && IsOp) { //피연산자와 연산자를 입력한 상태에서 연산자만 바꾸는 경우
+                if (Memory.Text == String.Empty && Screen.Text == string.Empty) return; //아무것도 안누르고 눌렀을경우
+                else if (Screen.Text != String.Empty && IsOp && op != "(" && op != ")") { //피연산자와 연산자를 입력한 상태에서 연산자만 바꾸는 경우 (ex 3 + -)
                     Memory.Text = Memory.Text.Remove(Memory.Text.Length - 1);
                     Memory.Text += op;
                     MemoryScreen.Text = MemoryScreen.Text.Remove(MemoryScreen.Text.Length - 1);
+                    TheFormula = TheFormula.Remove(TheFormula.Length - 1);
                     MemoryScreen.Text += op;
+                    WriteFormula(op);
                     BufferedOp = op;
                     ScreenBuffer = string.Empty;
                 }
@@ -207,7 +254,7 @@ namespace _1107 {
             result = double.Parse(new DataTable().Compute(formula, null).ToString());
 
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", result); // DataTable.Compute를 통해 수식 계산
-            IsDot = false;
+            IsDot = result != Convert.ToInt32(result);
             ScreenBuffer = string.Empty;
             Memory.Text = string.Empty;
             MemoryScreen.Text = string.Empty;
@@ -215,27 +262,29 @@ namespace _1107 {
         private void NUM0_Click(object sender, EventArgs e) {
             //숫자 0은 1의 자릿수에서 2개이상 쓰이지 않음.
             //소수점 아래에서 위의 조건은 무시됨.
-            if (ScreenBuffer.Length != 0) AddNumToScreen('0');
+            if (ScreenBuffer.Length != 0) AddOperandToScreen('0');
         }
         private void NUM00_Click(object sender, EventArgs e) {
             if (ScreenBuffer.Length != 0) {
-                AddNumToScreen('0');
-                AddNumToScreen('0');
+                AddOperandToScreen('0');
+                AddOperandToScreen('0');
             }
         }
-        private void NUM1_Click(object sender, EventArgs e) => AddNumToScreen('1');
-        private void NUM2_Click(object sender, EventArgs e) => AddNumToScreen('2');
-        private void NUM3_Click(object sender, EventArgs e) => AddNumToScreen('3');
-        private void NUM4_Click(object sender, EventArgs e) => AddNumToScreen('4');
-        private void NUM5_Click(object sender, EventArgs e) => AddNumToScreen('5');
-        private void NUM6_Click(object sender, EventArgs e) => AddNumToScreen('6');
-        private void NUM7_Click(object sender, EventArgs e) => AddNumToScreen('7');
-        private void NUM8_Click(object sender, EventArgs e) => AddNumToScreen('8');
-        private void NUM9_Click(object sender, EventArgs e) => AddNumToScreen('9');
+        private void NUM1_Click(object sender, EventArgs e) => AddOperandToScreen('1');
+        private void NUM2_Click(object sender, EventArgs e) => AddOperandToScreen('2');
+        private void NUM3_Click(object sender, EventArgs e) => AddOperandToScreen('3');
+        private void NUM4_Click(object sender, EventArgs e) => AddOperandToScreen('4');
+        private void NUM5_Click(object sender, EventArgs e) => AddOperandToScreen('5');
+        private void NUM6_Click(object sender, EventArgs e) => AddOperandToScreen('6');
+        private void NUM7_Click(object sender, EventArgs e) => AddOperandToScreen('7');
+        private void NUM8_Click(object sender, EventArgs e) => AddOperandToScreen('8');
+        private void NUM9_Click(object sender, EventArgs e) => AddOperandToScreen('9');
+        private void BracketOpen_Click(object sender, EventArgs e) => AddBracketToScreen('(');
+        private void BracketClose_Click(object sender, EventArgs e) => AddBracketToScreen(')');
         private void Dot_Click(object sender, EventArgs e) {
             if (!IsDot) {
-                if (ScreenBuffer.Length == 0) AddNumToScreen('0');
-                AddNumToScreen('.');
+                if (ScreenBuffer.Length == 0) AddOperandToScreen('0');
+                AddOperandToScreen('.');
                 IsDot = true;
             }
         }
@@ -248,6 +297,7 @@ namespace _1107 {
         private void Multiply_Click(object sender, EventArgs e) => BinaryOperate("*");
         private void Divide_Click(object sender, EventArgs e) => BinaryOperate("/");
         private void Mod_Click(object sender, EventArgs e) => BinaryOperate("%");
+        private void Power_Click(object sender, EventArgs e) => BinaryOperate("^");
         private void Equal_Click(object sender, EventArgs e) => ReturnResult();
         private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
             foreach (int i in Num) Num[i] = 0;
