@@ -1,6 +1,6 @@
 ﻿struct 식[]
-float 피연산자 1, 피연산자 2	(알고리즘에선 버퍼크기가 2인 '큐'로 간주)
-string 연산자		(알고리즘에선 버퍼크기가 1인 '스택'으로 간주)
+float 피연산자 1, 피연산자 2	(알고리즘에선 '큐'로 간주)
+string 연산자		(알고리즘에선 '스택'으로 간주)
 
 괄호가 한개 추가되는것이 식 배열의 인덱스가 1 늘어나는 것과 같음.
 
@@ -14,21 +14,27 @@ ScreenBuffer : 피연산자가 입력될 공간
 - 피연산자를 큐에 넣는다. (피연산자를 enqueue할땐 string(ScreenBuffer)에서 float으로 형변환.)
 else 연산결과를 큐에 넣는다.
 
+[enqueue(피연산자)]
+- 피연산자를 큐에 넣는다.
+
 [push]
-- 스택이 꽉찬경우 TryCalc 호출.
-else 스택중에 *, / 연산자가 있으면 TryCalc 호출.
-- 연산자를 넣는다.
+- 스택에 *, / 연산자가 있을때 TryCalc 호출. 
+- 스택에 +, -가 있고 현재 입력한 연산자도 +, - 일 때 TryCalc 호출. 
+- 연산자를 푸시한다.
 
 [deletebuffer]
 - ScreenBuffer 내용을 지운다.
 
 [TryCalc]
 - 연산이 유효한지 확인한다.(나머지연산을 하려는데, 소수가 있을경우) 유효하지 않으면 Return.
-- 피연산자2개와 연산자의 계산을 한다. 계산에 성공하면 InitStruct를 호출.
-- 연산결과를 출력한다.
+- 식에있는 피연산자2개와 연산자에 Top과의 계산을 한다. 
+- 계산에 성공하면 ResetStruct를 호출한뒤 연산결과를 Screen에 출력하고, enqueue(연산결과)를 호출한다.
 
-[InitStruct]
+[ResetStruct]
 - 스택과 큐를 비운다.
+
+[ResetStruct(istop)]
+- 스택의 탑을 pop 하고 큐를 비운다 
 
 [ReturnResult('=' 눌렀을때)]
 - 연산자가 입력되지 않았을 경우 Return
