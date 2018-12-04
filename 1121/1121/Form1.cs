@@ -6,14 +6,8 @@ using System.Windows.Forms;
 
 /*
     TODO LIST
-    괄호 계산() 추가
     붙여넣기로 수식 복사
     자릿수 구분자
-*/
-
-/* TEST LIST
-    아무것도 안넣어도 문제가 없는가.
-    Screen.Text와 ScreenBuffer의 차이를 비교했는가
 */
 
 /* 괄호 계산 알고리즘
@@ -28,22 +22,47 @@ using System.Windows.Forms;
     4. 같은 우선순위의 연산은 왼쪽부터 오른쪽으로 계산한다.
 */
 
+public struct Term { //항을 구성하는 구조체 생성
+    public string Operand, Operator;
+    public int Priority;
+
+    public Term(string a1, string a2, int a3) {
+        Operand = a1;
+        Operator = a2;
+        Priority = a3; //-1 일경우 : 괄호의 계산이 끝나 더이상 수식계산에 포함되지 않음을 뜻함
+    }
+}
+
+/*  스크린 업데이트가 일어나는 경우의 알고리즘
+    피 * 피
+    피 + 피 * 피 (이때는 * 연산의 결과만 나온다)
+    피 + 피 + (+가 입력된경우 -> 이전의 항의 연산자가 + 일때만 출력)
+    피 + 피 * 피 * 피 + ( 첫번째 항 + 스크린결과로 출력)
+    =
+    )
+
+*/
+
 namespace _1107 {
     public partial class Form1 : Form {
         private _1121.Form2 form_2;
-        static int size = 300; //field initialler(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
-        string TheFormula = string.Empty;
-        string ScreenBuffer = string.Empty; //raw string
+        static int size = 256; //field initialler(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
+        Term[] Terms = new Term[size];
+        byte TermIndex = 0;
+        byte Priority = 0;
+
+        string TheFormula = string.Empty; //삭제예정
         string BufferedNum = string.Empty;
         string BufferedOp = string.Empty;
-        string[] MemorizedNum = new string[size];
-        string[] MemorizedOp = new string[size];
-        byte[] Priority = new byte[size];
-        byte tick = 0;
+        bool IsOp = false; //false : 피연산자, true:연산자
+
+        string ScreenBuffer = string.Empty; //수식을 입력받는 스크린의 버퍼.
+        
+        byte tick = 0; //화면이 서서히 커지는 효과에 쓰일 변수
+
         byte screen_max_width = 24; //스크린의 너비
         byte memory_max_width = 36; //메모리 스크린의 너비
         bool IsDot = false; // 실수형인지 정수형인지
-        bool IsOp = false; //false : 피연산자, true:연산자
 
         public Form1() {
             InitializeComponent();
@@ -121,7 +140,6 @@ namespace _1107 {
                     CallMethodByName("NUM"+Convert.ToString((int)e.KeyCode-96)+"_Click"); break;
                 case Keys.Decimal:
                     Dot_Click(null, EventArgs.Empty); break;
-                case Keys.Oemplus:
                 case Keys.Add:
                     Plus_Click(null, EventArgs.Empty); break;
                 case Keys.Subtract:
@@ -133,6 +151,8 @@ namespace _1107 {
                     Divide_Click(null, EventArgs.Empty); break;
                 case Keys.Back:
                     Backspace_Click(null, EventArgs.Empty); break;
+                case Keys.Oemplus:
+                    Equal_Click(null, EventArgs.Empty); break;
             }
         }
         private bool IsInvalidModOp() {
@@ -322,10 +342,13 @@ namespace _1107 {
         private void Power_Click(object sender, EventArgs e) => BinaryOperate("^");
         private void Equal_Click(object sender, EventArgs e) => ReturnResult();
         private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
-            for (int x = 0; x < size; x++) {
-                MemorizedNum[x] = string.Empty;
-                MemorizedOp[x] = string.Empty;
+            for (int x = 0; Terms[x].Operand != string.Empty ; x++) {
+                Terms[x].Operand = string.Empty;
+                Terms[x].Operator = string.Empty;
+                Terms[x].Priority = 0;
             }
+            TermIndex = 0;
+            Priority = 0;
             IsDot = false;
             Screen.Text = string.Empty;
             ScreenBuffer = string.Empty;
