@@ -10,28 +10,6 @@ using System.Diagnostics;
     자릿수 구분자
 */
 
-/* 괄호 계산 알고리즘
-    3 + 3 * 5 +(1)+ 2
-    1   2   3   3   2
-    () : 역수
-    3 +(3 *(5 + 1)+ 2)
-
-    1. 식은 순서대로 적는다. 그러므로 
-    2. 괄호가 열릴때마다 인덱스의 우선순위가 1 높아진다.
-    3. 괄호가 닫힐때마다 인덱스의 우선순위가 1 내려간다. 
-    4. 같은 우선순위의 연산은 왼쪽부터 오른쪽으로 계산한다.
-*/
-
-/*  스크린 업데이트가 일어나는 경우의 알고리즘
-    피 * 피
-    피 + 피 * 피 (이때는 * 연산의 결과만 나온다)
-    피 + 피 + (+가 입력된경우 -> 이전의 항의 연산자가 + 일때만 출력)
-    피 + 피 * 피 * 피 + ( 첫번째 항 + 스크린결과로 출력)
-    =
-    )
-
-*/
-
 namespace _1107 {
 
     public partial class Form1 : Form {
@@ -90,6 +68,7 @@ namespace _1107 {
                 string str = string.Empty;
                 foreach (var v in element) {
                     str = v == null ? null : v;
+                    Debug.WriteLine(v);
                 }
                 return str;
             }
@@ -142,13 +121,15 @@ namespace _1107 {
 
         string ScreenBuffer = string.Empty; //수식을 입력받을 때의 버퍼.
         string BufferedTerm = string.Empty; //수식에 적용될때의 버퍼.
+        string BufferedOperator = string.Empty; //방금 계산한 마지막 연산자
+        string BufferedOperand = string.Empty; // 방금 계산한 마지막 피연산자
         string BufferedMemory = string.Empty; //메모리 스크린에 쓰기전에 쓰이는 버퍼.
         
         byte tick = 0; //화면이 서서히 커지는 효과에 쓰일 변수
 
+        bool IsDot = false; // 실수형인지 정수형인지
         byte screen_max_width = 24; //스크린의 너비
         byte memory_max_width = 36; //메모리 스크린의 너비
-        bool IsDot = false; // 실수형인지 정수형인지
 
         public Form1() {
             InitializeComponent();
@@ -244,6 +225,9 @@ namespace _1107 {
                     Equal_Click(null, EventArgs.Empty); break;
             }
         }
+        private void SetIsDot(string x) {
+            IsDot = Convert.ToDouble(x) != Convert.ToInt32(x);
+        }
         private bool IsValidModOp() {
             try {
                 Convert.ToInt64(Screen.Text);
@@ -254,8 +238,16 @@ namespace _1107 {
             return false;
         }
         private void ChangeOperator(string op) {
-            TheMemory[TheMemory.Count - 1].Op = op;
-            WriteFormula();
+            if (BufferedOperator == string.Empty) return; //아무것도 입력 안했는데 눌렀을경우
+            Debug.WriteLine("ChangeOperator" + BufferedTerm);
+            if (TheMemory.Count == 0) { // 1 + 2 = -
+                TheMemory.Add(new Memory(BufferedTerm));
+                TheMemory.Add(new Memory(op));
+                BufferedOperand = BufferedTerm;
+                BufferedOperator = op;
+            } else
+                TheMemory[TheMemory.Count == 0 ? 1 : TheMemory.Count - 1].Op = op;
+            UpdateFormula();
             MemoryScreenUpdate();
         }
         private int ValidateBracket() {
@@ -267,9 +259,6 @@ namespace _1107 {
 
             return NumOpenBracket - NumCloseBracket;
         }
-        private void AppendMemoryText(string op, string operand) {
-            
-        }
         private void AddOperandToScreen(char operand) {
             ScreenBuffer = ScreenBuffer + operand;
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", ScreenBuffer);
@@ -278,7 +267,7 @@ namespace _1107 {
             ScreenBuffer = string.Empty;
             Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", ScreenBuffer);
         }
-        private void UnaryOperate(string op) {
+        private void UnaryOperater(string op) {
             double calculated;
             string FORMEDTEXT = string.Empty;
             switch(op) {
@@ -299,7 +288,7 @@ namespace _1107 {
             ScreenBuffer = string.Empty;
             IsDot = false;
         }
-        private void WriteFormula() {
+        private void UpdateFormula() {
             string Formula = string.Empty;
             foreach (var list in TheMemory) {
                 //괄호가 아니면
@@ -319,7 +308,7 @@ namespace _1107 {
         private void PushOperator(string op) {
             Operators[TermIndex].push(op);
         }
-        private string Calculate() {
+        private string BinaryOperate() {
             double result = 0;
             double Op2 = Convert.ToDouble(Operands[TermIndex].pop());
             double Op1 = Convert.ToDouble(Operands[TermIndex].pop());
@@ -332,23 +321,33 @@ namespace _1107 {
                 case "^": result = Math.Pow(Op1, Op2); break;
             }
             BufferedTerm = Convert.ToString(result);
+            Debug.WriteLine(BufferedTerm);
+            Debug.WriteLine(BufferedOperator);
+            Debug.WriteLine(BufferedOperand);
             return BufferedTerm;
         }
         private void TryCalculate(string op) {
             int opcnt = Operands[TermIndex].count();
-            Operators[TermIndex].print();
             if (opcnt < 2) {
+                if (BufferedOperator != string.Empty) {
+                    //TheMemory.Add(new Memory(BufferedTerm));
+                    //TheMemory.Add(new Memory(op));
+                    Debug.WriteLine("In TryCalc" + BufferedTerm);
+                    Debug.WriteLine("TryCalc " + Operands[TermIndex].count());
+                    BufferedOperand = BufferedTerm;
+                    BufferedOperator = op;
+                }
                 return;
             } else {
                 bool IsOperatorPlusMinus = op.Equals("+") || op.Equals("-");
                 switch (Operators[TermIndex].count()) {
                     case 1:
                         if (!(Operators[TermIndex].peek().Equals("+") || Operators[TermIndex].peek().Equals("-"))) {
-                            PushOperand(Calculate());
+                            PushOperand(BinaryOperate());
                             ScreenUpdate();
                         } else {
                             if (IsOperatorPlusMinus) {
-                                PushOperand(Calculate());
+                                PushOperand(BinaryOperate());
                                 ScreenUpdate();
                             } else {
                                 return;
@@ -357,11 +356,11 @@ namespace _1107 {
                         break;
                     case 2:
                         if (!IsOperatorPlusMinus) {
-                            PushOperand(Calculate());
+                            PushOperand(BinaryOperate());
                             ScreenUpdate();
                         } else {
-                            PushOperand(Calculate());
-                            PushOperand(Calculate());
+                            PushOperand(BinaryOperate());
+                            PushOperand(BinaryOperate());
                             ScreenUpdate();
                         }
                         break;
@@ -369,17 +368,16 @@ namespace _1107 {
             }
              
         }
-        private void BinaryOperate(string op) {
-            if (IsValidModOp()) return;
+        private void BinaryOperater(string op) {
+            //if (IsValidModOp()) return;
             string operand = ScreenBuffer;
-            Debug.WriteLine(operand == string.Empty);
             if (operand == string.Empty) { // 1 + 2 - +
                 ChangeOperator(op);
                 return;
             }
             TheMemory.Add(new Memory(operand));
             TheMemory.Add(new Memory(op));
-            WriteFormula();
+            UpdateFormula();
             PushOperand(operand);
             TryCalculate(op);
             PushOperator(op);
@@ -387,7 +385,38 @@ namespace _1107 {
             MemoryScreenUpdate();
         }
         private void ReturnResult() {
+            if (Operands[TermIndex].count() == 0 && BufferedOperator == string.Empty) { Debug.WriteLine("ReturnResult Null List"); return; } //연산자나 피연산자가 입력되지 않았을경우
+            string result = string.Empty;
+            if (Operands[TermIndex].count() == 0 && BufferedTerm != string.Empty ) { // 2 + = = =
+                Debug.WriteLine("ReturnResult Case 1");
+                Operands[TermIndex].push(BufferedTerm);
+                Operands[TermIndex].push(BufferedOperand);
+                Operators[TermIndex].push(BufferedOperator);
+            } else if (ScreenBuffer != string.Empty) {
+                Debug.WriteLine("ReturnResult Case 3");
+                BufferedOperator = TheMemory[TheMemory.Count - 1].Op;
+                Operands[TermIndex].push(ScreenBuffer);
+                BufferedOperand = BufferedTerm;
+            } else if (Operands[TermIndex].count() == 1) { // 2 + 3 + = 
+                Debug.WriteLine("ReturnResult Case 2");
+                BufferedOperator = TheMemory[TheMemory.Count - 1].Op;
+                BufferedOperand = TheMemory[TheMemory.Count - 2].Term;
+                Operands[TermIndex].push(BufferedOperand);
+            }
             
+            result = BinaryOperate();
+            Debug.WriteLine("In Return Result"+ BufferedTerm);
+            
+            TheMemory.Clear();
+            BufferedMemory = string.Empty;
+            ScreenBuffer = string.Empty;
+            MemoryScreenUpdate();
+            for (int i = 0; i < size; i++) {
+                Operands[i].clear();
+                Operators[i].clear();
+            }
+            SetIsDot(result);
+            ScreenUpdate();
         }
         private void NUM0_Click(object sender, EventArgs e) {
             //숫자 0은 1의 자릿수에서 2개이상 쓰이지 않음.
@@ -418,18 +447,18 @@ namespace _1107 {
                 IsDot = true;
             }
         }
-        private void Negate_Click(object sender, EventArgs e) => UnaryOperate("negate");
-        private void Root_Click(object sender, EventArgs e) => UnaryOperate("sqrt");
-        private void Reciprocal_Click(object sender, EventArgs e) => UnaryOperate("reciproc");
-        private void Percent_Click(object sender, EventArgs e) => UnaryOperate("percent");
-        private void Plus_Click(object sender, EventArgs e) => BinaryOperate("+");
-        private void Minus_Click(object sender, EventArgs e) => BinaryOperate("-");
-        private void Multiply_Click(object sender, EventArgs e) => BinaryOperate("*");
-        private void Divide_Click(object sender, EventArgs e) => BinaryOperate("/");
-        private void Mod_Click(object sender, EventArgs e) => BinaryOperate("%");
-        private void Power_Click(object sender, EventArgs e) => BinaryOperate("^");
+        private void Negate_Click(object sender, EventArgs e) => UnaryOperater("negate");
+        private void Root_Click(object sender, EventArgs e) => UnaryOperater("sqrt");
+        private void Reciprocal_Click(object sender, EventArgs e) => UnaryOperater("reciproc");
+        private void Percent_Click(object sender, EventArgs e) => UnaryOperater("percent");
+        private void Plus_Click(object sender, EventArgs e) => BinaryOperater("+");
+        private void Minus_Click(object sender, EventArgs e) => BinaryOperater("-");
+        private void Multiply_Click(object sender, EventArgs e) => BinaryOperater("*");
+        private void Divide_Click(object sender, EventArgs e) => BinaryOperater("/");
+        private void Mod_Click(object sender, EventArgs e) => BinaryOperater("%");
+        private void Power_Click(object sender, EventArgs e) => BinaryOperater("^");
         private void Equal_Click(object sender, EventArgs e) => ReturnResult();
-        private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
+        private void AC_Click(object sender, EventArgs e) { // 메모리 + 스크린 모두 초기화 
             TheMemory.Clear();
             for (int i = 0; i < size; i++) {
                 Operands[i].clear();
@@ -439,6 +468,7 @@ namespace _1107 {
 
             ScreenBuffer = string.Empty;
             BufferedTerm = string.Empty;
+            BufferedOperator = string.Empty;
             BufferedMemory = string.Empty;
 
             Screen.Text = string.Empty;
@@ -455,7 +485,7 @@ namespace _1107 {
         }
         private void Backspace_Click(object sender, EventArgs e) {
             //기본적으로 c#에는 안정성문제로 포인터 연산자 사용을 막아두었다. (Unsafe 모드로 디버그 해야 한다고함)
-            //따라서 문자열을 관리하기 위해서는 주워진 내장함수를 사용해야한다.
+            //따라서 문자열을 관리하기 위해서는 주워진 메소드를 사용해야한다.
             //스트링이름.Remove(문자열인덱스, 지울 갯수)
             if (ScreenBuffer.Length == 0) return;
             if (ScreenBuffer[ScreenBuffer.Length - 1] == '.') IsDot = false;
