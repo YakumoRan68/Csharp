@@ -21,8 +21,8 @@ elseif 연산자스택에 연산자가 없을경우 return					(case1)
 elseif 연산자스택에 연산자가 1개있고 그 연산자가 *, / 인경우					
 ㄴ PushOperand(Calculate)를 1회 호출 한다.					(case2)
 elseif 연산자스택에 연산자가 1개있고 그 연산자가 +, - 인경우
-ㄴ PushOperand(Calculate)를 1회 호출 한다.					(case3)
-ㄴ push 할 연산자가 *, / 인경우 return						(case4)
+ㄴ push 할 연산자가 +, - 인경우 PushOperand(Calculate)를 1회 호출 한다.		(case3)
+ㄴ push 할 연산자가 *, / 인경우 return					(case4)
 elseif 연산자스택에 연산자가 2개있고, push하려는 연산자가 *, / 인경우				
 ㄴ PushOperand(Calculate)를 1회 호출 한다.					(case5)
 elseif 연산자스택에 연산자가 2개있고, push하려는 연산자가 +, - 인경우				

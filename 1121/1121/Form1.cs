@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 /*
     TODO LIST
@@ -33,65 +33,95 @@ using System.Windows.Forms;
 */
 
 namespace _1107 {
-    class Stack {
-        private string[] element;
-        private int top;
-        public Stack() {
-            element = new string[3];
-            top = -1;
-        }
-
-        public bool isempty() {
-            return top == -1;
-        }
-
-        public string peek() {
-            return element[top];
-        }
-
-        public void push(string item) {
-            if (top == 2) {
-                MessageBox.Show("Stack Overflow");
-                return;
-            } else {
-                element[++top] = item;
-            }
-        }
-
-        public int count() {
-            int cnt = 0;
-            foreach (var v in element) {
-                cnt++;
-            }
-            return cnt;
-        }
-        
-        public string pop() {
-            if (top == -1) {
-                MessageBox.Show("Stack Underflow");
-                return string.Empty;
-            } else {
-                return element[top--];
-            }
-        }
-    }
-    public struct TermData { //저장용 구조체
-        public string Operand, Operator;
-        public int Priority;
-        public TermData(string a1, string a2, int a3) {
-            Operand = a1;
-            Operator = a2;
-            Priority = a3; //-1 일경우 : 괄호의 계산이 끝나 더이상 수식계산에 포함되지 않음을 뜻함
-        }
-    }
 
     public partial class Form1 : Form {
+        class Expression {
+            private string[] element;
+            private int top;
+            public Expression() {
+                element = new string[3];
+                top = -1;
+            }
+
+            public bool isempty() {
+                return top == -1;
+            }
+
+            public string peek() {
+                return element[top];
+            }
+
+            public void push(string item) {
+                if (top == 2) {
+                    MessageBox.Show("Stack Overflow");
+                    return;
+                } else {
+                    element[++top] = item;
+                }
+            }
+
+            public int count() {
+                int cnt = 0;
+                foreach (var v in element) {
+                    cnt++;
+                }
+                return cnt;
+            }
+
+            public string pop() {
+                if (top == -1) {
+                    MessageBox.Show("Stack Underflow");
+                    return string.Empty;
+                } else {
+                    return element[top--];
+                }
+            }
+        }
+
+        class Memory {
+            private string term = string.Empty;
+            private string op = string.Empty;
+
+            public Memory(string str) {
+                if (IsNumeric(str)) term = str; 
+                else op = str;
+            }
+
+            public bool IsNumeric(string str) { //숫자인지 아닌지 판단
+                return double.TryParse(str, out double n);
+            }
+
+            public string Term {
+                get {
+                    return term;
+                }
+                set {
+                    if (!IsNumeric(value)) return;
+                    term = value;
+                }
+            }
+
+            public string Op {
+                get {
+                    return op;
+                }
+                set {
+                    if (IsNumeric(value)) return;
+                    op = value;
+                }
+            }
+
+            public override string ToString() {
+                return op == string.Empty ? term : op; //항이랑 기호 중 비어있지 않은 것으로 반환
+            }
+        }
+
         private _1121.Form2 form_2;
         static int size = 256; //field initialler(배열크기 설정하는 부분)은 고정적(static)으로 설정해야 한다.
-        Stack Operand = new Stack();
-        Stack Operator = new Stack();
-        TermData[] Terms = new TermData[size];
-        byte TermIndex = 0;
+        List<Memory> TheMemory = new List<Memory>();
+        Expression[] Operands = new Expression[size];
+        Expression[] Operators = new Expression[size];
+        byte TermIndex = 0; //괄호가 열릴때마다 이 수치가 1씩올라간다.
 
         string ScreenBuffer = string.Empty; //수식을 입력받는 스크린의 버퍼.
         string AnswerBuffer = string.Empty;
@@ -107,12 +137,14 @@ namespace _1107 {
             MemoryScreen.Text = string.Empty;
             overflowed.Visible = false;
             KeyPreview = true;
+            for (int i = 0; i < size; i++) Operands[i] = new Expression();
+            for (int i = 0; i < size; i++) Operators[i] = new Expression();
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             //대부분의 경우 키보드에서 키를 누르면 KeyUp, KeyPress, KeyDown 등의 이벤트들이 발생한다.
             //그러나 Control, Alt, ReturnResult 같은 특수한 키들은 상기된 이벤트들을 발생시기 전에 미리 짜여진, 다른 행동을 취한다.
             //ProcessCmdKey는 해당 폼으로 들어오는 키들을 제일 먼저 인식하고 관련된 키에 대한 프로시저들을 실행하는 메소드인데, 이 함수를 오버라이드 한다.
-
+            Debug.WriteLine(Convert.ToString(keyData));
             if (keyData == Keys.Return) {
                 Equal.PerformClick();
                 return true; //여기서 return 함으로써 enter키를 누르는 행동이 '버튼을 누르는 등'의 프로시저들 행하지 않고 종료시킨다.
@@ -192,7 +224,7 @@ namespace _1107 {
                     Equal_Click(null, EventArgs.Empty); break;
             }
         }
-        private bool IsInvalidModOp() {
+        private bool IsValidModOp() {
             try {
                 Convert.ToInt64(Screen.Text);
             } catch {
@@ -241,14 +273,21 @@ namespace _1107 {
             }
             
         }
-        private void PushOperand(string x) {
-            Operand.push(x);
+        private void DeleteBuffer() {
+            ScreenBuffer = string.Empty;
+            IsDot = false;
+        }
+        private void PushOperand(string op) {
+            Operands[TermIndex].push(op);
+        }
+        private void PushOperator(string op) {
+            Operators[TermIndex].push(op);
         }
         private string Calculate() {
             double result = 0;
-            double Op1 = Convert.ToDouble(Operand.pop());
-            double Op2 = Convert.ToDouble(Operand.pop());
-            switch (Operator.pop()) {
+            double Op1 = Convert.ToDouble(Operands[TermIndex].pop());
+            double Op2 = Convert.ToDouble(Operands[TermIndex].pop());
+            switch (Operators[TermIndex].pop()) {
                 case "+": result = Op1 + Op2; break;
                 case "-": result = Op1 - Op2; break;
                 case "*": result = Op1 * Op2; break;
@@ -260,32 +299,36 @@ namespace _1107 {
             return AnswerBuffer;
         }
         private void TryCalculate(string op) {
-
-            if (!IsInvalidModOp() || Operand.count() < 2 || Operator.isempty()) return;
+            if (Operands[TermIndex].count() < 2 || Operators[TermIndex].isempty()) return;
             else {
-                bool IsOperatorPlusMinus = Operator.peek().Equals("+") || Operator.peek().Equals("-");
-                switch (Operator.count()) {
+                bool IsOperatorPlusMinus = Operators[TermIndex].peek().Equals("+") || Operators[TermIndex].peek().Equals("-");
+                switch (Operators[TermIndex].count()) {
                     case 1:
-                        if (IsOperatorPlusMinus) PushOperand(Calculate()); //연산자스택에 연산자가 1개있고 그 연산자가 *, / 인경우
+                        if (IsOperatorPlusMinus) PushOperand(Calculate());
                         else {
-                            if (op.Equals("+") || op.Equals("-")) PushOperand(Calculate()); //할 연산이 +, - 인경우
+                            if (op.Equals("+") || op.Equals("-")) PushOperand(Calculate()); 
                             else return;
                         } break;
                     case 2:
                         if (!IsOperatorPlusMinus) PushOperand(Calculate());
+                        else PushOperand(Calculate()); PushOperand(Calculate());
                         break;
-
                 }
             }
              
         }
         private void BinaryOperate(string op) {
+            if (!IsValidModOp()) return;
             string operand = ScreenBuffer;
+            TheMemory.Add(new Memory(operand));
+            TheMemory.Add(new Memory(op));
             PushOperand(operand);
+            TryCalculate(op);
+            PushOperator(operand);
+
         }
         private void ReturnResult() {
             
-
         }
         private void NUM0_Click(object sender, EventArgs e) {
             //숫자 0은 1의 자릿수에서 2개이상 쓰이지 않음.
@@ -328,16 +371,15 @@ namespace _1107 {
         private void Power_Click(object sender, EventArgs e) => BinaryOperate("^");
         private void Equal_Click(object sender, EventArgs e) => ReturnResult();
         private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
-            for (int x = 0; Terms[x].Operand != string.Empty ; x++) {
-                Terms[x].Operand = string.Empty;
-                Terms[x].Operator = string.Empty;
-                Terms[x].Priority = 0;
-            }
+            //for (int x = 0; Terms[x].Operand != string.Empty ; x++) {
+            //    Terms[x].Operand = string.Empty;
+            //    Terms[x].Operator = string.Empty;
+            //    Terms[x].Priority = 0;
+            //}
             TermIndex = 0;
             IsDot = false;
             Screen.Text = string.Empty;
             ScreenBuffer = string.Empty;
-            Memory.Text = string.Empty;
             MemoryScreen.Text = string.Empty;
             overflowed.Visible = false;
         }
@@ -369,5 +411,6 @@ namespace _1107 {
         private void timer1_Tick(object sender, EventArgs e) {
 
         }
+
     }
 }

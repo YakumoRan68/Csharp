@@ -54,7 +54,6 @@
             this.NUM00 = new System.Windows.Forms.Button();
             this.MemoryScreen = new System.Windows.Forms.Label();
             this.Percent = new System.Windows.Forms.Button();
-            this.Memory = new System.Windows.Forms.TextBox();
             this.Mod = new System.Windows.Forms.Button();
             this.Root = new System.Windows.Forms.Button();
             this.overflowed = new System.Windows.Forms.Label();
@@ -370,19 +369,6 @@
             this.Percent.UseVisualStyleBackColor = true;
             this.Percent.Click += new System.EventHandler(this.Percent_Click);
             // 
-            // Memory
-            // 
-            this.Memory.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Memory.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Memory.Font = new System.Drawing.Font("굴림", 14F);
-            this.Memory.Location = new System.Drawing.Point(9, 24);
-            this.Memory.Margin = new System.Windows.Forms.Padding(0);
-            this.Memory.Multiline = true;
-            this.Memory.Name = "Memory";
-            this.Memory.Size = new System.Drawing.Size(301, 19);
-            this.Memory.TabIndex = 0;
-            this.Memory.Visible = false;
-            // 
             // Mod
             // 
             this.Mod.Font = new System.Drawing.Font("굴림", 11F);
@@ -564,7 +550,6 @@
             this.Controls.Add(this.overflowed);
             this.Controls.Add(this.Root);
             this.Controls.Add(this.Mod);
-            this.Controls.Add(this.Memory);
             this.Controls.Add(this.Percent);
             this.Controls.Add(this.NUM00);
             this.Controls.Add(this.Screen);
@@ -629,7 +614,6 @@
         private System.Windows.Forms.Button NUM00;
         private System.Windows.Forms.Label MemoryScreen;
         private System.Windows.Forms.Button Percent;
-        private System.Windows.Forms.TextBox Memory;
         private System.Windows.Forms.Button Mod;
         private System.Windows.Forms.Button Root;
         private System.Windows.Forms.Label overflowed;
