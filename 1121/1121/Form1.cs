@@ -63,7 +63,7 @@ namespace _1107 {
             public int count() {
                 int cnt = 0;
                 foreach (var v in element) {
-                    cnt++;
+                    cnt = v == null ? cnt : ++cnt; 
                 }
                 return cnt;
             }
@@ -73,8 +73,25 @@ namespace _1107 {
                     MessageBox.Show("Stack Underflow");
                     return string.Empty;
                 } else {
-                    return element[top--];
+                    string str = element[top];
+                    element[top--] = null;
+                    return str;
                 }
+            }
+
+            public void clear() {
+                for (int i = 0; i < 3; i++) {
+                    element[i] = null; 
+                }
+                top = -1;
+            }
+
+            public string print() {
+                string str = string.Empty;
+                foreach (var v in element) {
+                    str = v == null ? null : v;
+                }
+                return str;
             }
         }
 
@@ -123,8 +140,9 @@ namespace _1107 {
         Expression[] Operators = new Expression[size];
         byte TermIndex = 0; //괄호가 열릴때마다 이 수치가 1씩올라간다.
 
-        string ScreenBuffer = string.Empty; //수식을 입력받는 스크린의 버퍼.
-        string AnswerBuffer = string.Empty;
+        string ScreenBuffer = string.Empty; //수식을 입력받을 때의 버퍼.
+        string BufferedTerm = string.Empty; //수식에 적용될때의 버퍼.
+        string BufferedMemory = string.Empty; //메모리 스크린에 쓰기전에 쓰이는 버퍼.
         
         byte tick = 0; //화면이 서서히 커지는 효과에 쓰일 변수
 
@@ -137,14 +155,16 @@ namespace _1107 {
             MemoryScreen.Text = string.Empty;
             overflowed.Visible = false;
             KeyPreview = true;
-            for (int i = 0; i < size; i++) Operands[i] = new Expression();
-            for (int i = 0; i < size; i++) Operators[i] = new Expression();
+            for (int i = 0; i < size; i++) {
+                Operands[i] = new Expression();
+                Operators[i] = new Expression();
+            }
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             //대부분의 경우 키보드에서 키를 누르면 KeyUp, KeyPress, KeyDown 등의 이벤트들이 발생한다.
             //그러나 Control, Alt, ReturnResult 같은 특수한 키들은 상기된 이벤트들을 발생시기 전에 미리 짜여진, 다른 행동을 취한다.
             //ProcessCmdKey는 해당 폼으로 들어오는 키들을 제일 먼저 인식하고 관련된 키에 대한 프로시저들을 실행하는 메소드인데, 이 함수를 오버라이드 한다.
-            Debug.WriteLine(Convert.ToString(keyData));
+            //Debug.WriteLine(Convert.ToString(keyData));
             if (keyData == Keys.Return) {
                 Equal.PerformClick();
                 return true; //여기서 return 함으로써 enter키를 누르는 행동이 '버튼을 누르는 등'의 프로시저들 행하지 않고 종료시킨다.
@@ -233,6 +253,11 @@ namespace _1107 {
             }
             return false;
         }
+        private void ChangeOperator(string op) {
+            TheMemory[TheMemory.Count - 1].Op = op;
+            WriteFormula();
+            MemoryScreenUpdate();
+        }
         private int ValidateBracket() {
             int NumOpenBracket = 0;
             //foreach (char c in TheFormula) if (c == '(') NumOpenBracket++;
@@ -243,9 +268,6 @@ namespace _1107 {
             return NumOpenBracket - NumCloseBracket;
         }
         private void AppendMemoryText(string op, string operand) {
-            
-        }
-        private void MemoryScreenUpdate() {
             
         }
         private void AddOperandToScreen(char operand) {
@@ -277,6 +299,20 @@ namespace _1107 {
             ScreenBuffer = string.Empty;
             IsDot = false;
         }
+        private void WriteFormula() {
+            string Formula = string.Empty;
+            foreach (var list in TheMemory) {
+                //괄호가 아니면
+                Formula = string.Format("{0} {1}", Formula, list.ToString());
+            }
+            BufferedMemory = Formula;
+        }
+        private void MemoryScreenUpdate() {
+            MemoryScreen.Text = string.Format("{0," + Convert.ToString(memory_max_width) + "}", BufferedMemory);
+        }
+        private void ScreenUpdate() {
+            Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", BufferedTerm);
+        }
         private void PushOperand(string op) {
             Operands[TermIndex].push(op);
         }
@@ -285,8 +321,8 @@ namespace _1107 {
         }
         private string Calculate() {
             double result = 0;
-            double Op1 = Convert.ToDouble(Operands[TermIndex].pop());
             double Op2 = Convert.ToDouble(Operands[TermIndex].pop());
+            double Op1 = Convert.ToDouble(Operands[TermIndex].pop());
             switch (Operators[TermIndex].pop()) {
                 case "+": result = Op1 + Op2; break;
                 case "-": result = Op1 - Op2; break;
@@ -295,37 +331,60 @@ namespace _1107 {
                 case "%": result = Op1 % Op2; break;
                 case "^": result = Math.Pow(Op1, Op2); break;
             }
-            AnswerBuffer = Convert.ToString(result);
-            return AnswerBuffer;
+            BufferedTerm = Convert.ToString(result);
+            return BufferedTerm;
         }
         private void TryCalculate(string op) {
-            if (Operands[TermIndex].count() < 2 || Operators[TermIndex].isempty()) return;
-            else {
-                bool IsOperatorPlusMinus = Operators[TermIndex].peek().Equals("+") || Operators[TermIndex].peek().Equals("-");
+            int opcnt = Operands[TermIndex].count();
+            Operators[TermIndex].print();
+            if (opcnt < 2) {
+                return;
+            } else {
+                bool IsOperatorPlusMinus = op.Equals("+") || op.Equals("-");
                 switch (Operators[TermIndex].count()) {
                     case 1:
-                        if (IsOperatorPlusMinus) PushOperand(Calculate());
-                        else {
-                            if (op.Equals("+") || op.Equals("-")) PushOperand(Calculate()); 
-                            else return;
-                        } break;
+                        if (!(Operators[TermIndex].peek().Equals("+") || Operators[TermIndex].peek().Equals("-"))) {
+                            PushOperand(Calculate());
+                            ScreenUpdate();
+                        } else {
+                            if (IsOperatorPlusMinus) {
+                                PushOperand(Calculate());
+                                ScreenUpdate();
+                            } else {
+                                return;
+                            }
+                        }
+                        break;
                     case 2:
-                        if (!IsOperatorPlusMinus) PushOperand(Calculate());
-                        else PushOperand(Calculate()); PushOperand(Calculate());
+                        if (!IsOperatorPlusMinus) {
+                            PushOperand(Calculate());
+                            ScreenUpdate();
+                        } else {
+                            PushOperand(Calculate());
+                            PushOperand(Calculate());
+                            ScreenUpdate();
+                        }
                         break;
                 }
             }
              
         }
         private void BinaryOperate(string op) {
-            if (!IsValidModOp()) return;
+            if (IsValidModOp()) return;
             string operand = ScreenBuffer;
+            Debug.WriteLine(operand == string.Empty);
+            if (operand == string.Empty) { // 1 + 2 - +
+                ChangeOperator(op);
+                return;
+            }
             TheMemory.Add(new Memory(operand));
             TheMemory.Add(new Memory(op));
+            WriteFormula();
             PushOperand(operand);
             TryCalculate(op);
-            PushOperator(operand);
-
+            PushOperator(op);
+            DeleteBuffer();
+            MemoryScreenUpdate();
         }
         private void ReturnResult() {
             
@@ -371,17 +430,23 @@ namespace _1107 {
         private void Power_Click(object sender, EventArgs e) => BinaryOperate("^");
         private void Equal_Click(object sender, EventArgs e) => ReturnResult();
         private void AC_Click(object sender, EventArgs e) { // 메모리 버퍼 + 스크린버퍼 모두 초기화 
-            //for (int x = 0; Terms[x].Operand != string.Empty ; x++) {
-            //    Terms[x].Operand = string.Empty;
-            //    Terms[x].Operator = string.Empty;
-            //    Terms[x].Priority = 0;
-            //}
+            TheMemory.Clear();
+            for (int i = 0; i < size; i++) {
+                Operands[i].clear();
+                Operators[i].clear();
+            }
             TermIndex = 0;
-            IsDot = false;
-            Screen.Text = string.Empty;
+
             ScreenBuffer = string.Empty;
+            BufferedTerm = string.Empty;
+            BufferedMemory = string.Empty;
+
+            Screen.Text = string.Empty;
             MemoryScreen.Text = string.Empty;
+
             overflowed.Visible = false;
+
+            IsDot = false;
         }
         private void CE_Click(object sender, EventArgs e) { // 스크린버퍼만 초기화
             IsDot = false;
