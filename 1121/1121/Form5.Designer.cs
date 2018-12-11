@@ -30,7 +30,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 266);
+            this.button1.Location = new System.Drawing.Point(206, 312);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 36);
             this.button1.TabIndex = 9;
@@ -40,10 +40,13 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(140, 20);
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(333, 282);
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(520, 282);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -51,11 +54,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 331);
+            this.ClientSize = new System.Drawing.Size(544, 360);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Name = "Form5";
-            this.Text = "교수님에게 쓰는 편지";
+            this.Text = "꼭 끝까지 읽어주세요";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -567,5 +567,9 @@ namespace _1121 {
         private void 개발환경ToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("운영 체제 : Windows 10\n개발 도구 : Microsoft Visual Studio 2017\n\t", "< 개발 환경 >");
         private void 버전정보ToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("C#으로 내가 만든 계산기 1.0", "< 버전 정보 >");
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
+
+        private void 일반용계산기ToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
     }
 }

@@ -425,6 +425,7 @@
             this.일반용계산기ToolStripMenuItem.Name = "일반용계산기ToolStripMenuItem";
             this.일반용계산기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.일반용계산기ToolStripMenuItem.Text = "일반용 계산기";
+            this.일반용계산기ToolStripMenuItem.Click += new System.EventHandler(this.일반용계산기ToolStripMenuItem_Click);
             // 
             // 공학용계산기ToolStripMenuItem
             // 
