@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -46,11 +47,12 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(295, 282);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "이 름 : 김동욱\r\n\r\n취미 : 코딩, 컴퓨터 게임\r\n\r\n전공 : 소프트웨어 공학\r\n\r\n강의 과목 : C#";
+            this.textBox1.Text = "이 름 : 김동욱\r\n\r\n취미 : 코딩, 컴퓨터 게임\r\n\r\n전공 : 소프트웨어 공학\r\n\r\n강의 과목 : C#\r\n\r\nGithub Page : \r\nht" +
+    "tps://github.com/YakumoRan68\r\nhttps://github.com/HimekaidouHatate\r\n";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::_1121.Properties.Resources.KakaoTalk_20181212_002858010;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(16, 47);
             this.pictureBox1.Name = "pictureBox1";
