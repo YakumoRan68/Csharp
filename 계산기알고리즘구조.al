@@ -15,9 +15,9 @@ ScreenBuffer : 피연산자가 입력될 공간
 (string(ScreenBuffer)에서 float으로 형변환해서 대입.)
 
 [TryCalc]
-- 연산이 유효한지 확인한다.(나머지연산, 팩토리얼을 하려는데, 소수가 있을경우) 유효하지 않으면 error.
-- 피연산자 스택에 피연산자가 2개 미만 일경우 return
-elseif 연산자스택에 연산자가 없을경우 return					(case1)
+- 연산이 유효한지 확인한다.(팩토리얼을 하려는데, 소수가 있을경우 등) 유효하지 않으면 error.
+- 피연산자 스택에 피연산자가 2개 미만 일경우 return				(case1)
+elseif 연산자스택에 연산자가 없을경우 return					
 elseif 연산자스택에 연산자가 1개있고 그 연산자가 *, / 인경우					
 ㄴ PushOperand(Calculate)를 1회 호출 한다.					(case2)
 elseif 연산자스택에 연산자가 1개있고 그 연산자가 +, - 인경우
@@ -26,7 +26,7 @@ elseif 연산자스택에 연산자가 1개있고 그 연산자가 +, - 인경�
 elseif 연산자스택에 연산자가 2개있고, push하려는 연산자가 *, / 인경우				
 ㄴ PushOperand(Calculate)를 1회 호출 한다.					(case5)
 elseif 연산자스택에 연산자가 2개있고, push하려는 연산자가 +, - 인경우				
-ㄴ 연산자스택이 빌 때까지 PushOperand(Calculate)(2회 수행)한다.			(case6)
+ㄴ 연산자스택이 빌 때까지 PushOperand(Calculate)(2회 호출)한다.			(case6)
 
 [Calculate]
 - (피연산자 pop) (연산자 pop) (피연산자 pop) 의 연산을 하여 결과값을 반환한다.

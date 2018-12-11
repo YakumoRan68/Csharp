@@ -1,4 +1,4 @@
-﻿namespace _1107
+﻿namespace _1121
 {
     partial class Form1
     {
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.NUM1 = new System.Windows.Forms.Button();
             this.NUM2 = new System.Windows.Forms.Button();
             this.NUM3 = new System.Windows.Forms.Button();
@@ -40,7 +39,6 @@
             this.NUM4 = new System.Windows.Forms.Button();
             this.NUM5 = new System.Windows.Forms.Button();
             this.NUM6 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.AC = new System.Windows.Forms.Button();
             this.CE = new System.Windows.Forms.Button();
             this.Backspace = new System.Windows.Forms.Button();
@@ -63,13 +61,15 @@
             this.공학용계산기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.복사ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.붙여넣기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.메모리복사ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.개발자소개ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.개발환경ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.교수님ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.정보ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.사용정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.버전정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Reciproc = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.BracketOpen = new System.Windows.Forms.Button();
             this.BracketClose = new System.Windows.Forms.Button();
             this.Power = new System.Windows.Forms.Button();
@@ -208,14 +208,6 @@
             this.NUM6.Text = "6";
             this.NUM6.UseVisualStyleBackColor = true;
             this.NUM6.Click += new System.EventHandler(this.NUM6_Click);
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(7, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(303, 16);
-            this.label1.TabIndex = 999;
-            this.label1.Text = "label1";
             // 
             // AC
             // 
@@ -409,7 +401,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.파일ToolStripMenuItem,
-            this.정보ToolStripMenuItem});
+            this.toolStripMenuItem3,
+            this.정보ToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(324, 24);
@@ -430,61 +423,87 @@
             // 일반용계산기ToolStripMenuItem
             // 
             this.일반용계산기ToolStripMenuItem.Name = "일반용계산기ToolStripMenuItem";
-            this.일반용계산기ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.일반용계산기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.일반용계산기ToolStripMenuItem.Text = "일반용 계산기";
             // 
             // 공학용계산기ToolStripMenuItem
             // 
             this.공학용계산기ToolStripMenuItem.Name = "공학용계산기ToolStripMenuItem";
-            this.공학용계산기ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.공학용계산기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.공학용계산기ToolStripMenuItem.Text = "공학용 계산기";
             this.공학용계산기ToolStripMenuItem.Click += new System.EventHandler(this.공학용계산기ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(147, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
-            // 정보ToolStripMenuItem
+            // toolStripMenuItem3
             // 
-            this.정보ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.복사ToolStripMenuItem,
-            this.붙여넣기ToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.메모리복사ToolStripMenuItem});
-            this.정보ToolStripMenuItem.Name = "정보ToolStripMenuItem";
-            this.정보ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.정보ToolStripMenuItem.Text = "편집";
+            this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.개발자소개ToolStripMenuItem,
+            this.개발환경ToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.교수님ToolStripMenuItem});
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(43, 20);
+            this.toolStripMenuItem3.Text = "정보";
             // 
-            // 복사ToolStripMenuItem
+            // 개발자소개ToolStripMenuItem
             // 
-            this.복사ToolStripMenuItem.Name = "복사ToolStripMenuItem";
-            this.복사ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.복사ToolStripMenuItem.Text = "복사";
+            this.개발자소개ToolStripMenuItem.Name = "개발자소개ToolStripMenuItem";
+            this.개발자소개ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.개발자소개ToolStripMenuItem.Text = "개발자 소개";
+            this.개발자소개ToolStripMenuItem.Click += new System.EventHandler(this.개발자소개ToolStripMenuItem_Click);
             // 
-            // 붙여넣기ToolStripMenuItem
+            // 개발환경ToolStripMenuItem
             // 
-            this.붙여넣기ToolStripMenuItem.Name = "붙여넣기ToolStripMenuItem";
-            this.붙여넣기ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.붙여넣기ToolStripMenuItem.Text = "붙여넣기";
+            this.개발환경ToolStripMenuItem.Name = "개발환경ToolStripMenuItem";
+            this.개발환경ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.개발환경ToolStripMenuItem.Text = "개발 환경";
+            this.개발환경ToolStripMenuItem.Click += new System.EventHandler(this.개발환경ToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem2
+            // toolStripSeparator1
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
             // 
-            // 메모리복사ToolStripMenuItem
+            // 교수님ToolStripMenuItem
             // 
-            this.메모리복사ToolStripMenuItem.Name = "메모리복사ToolStripMenuItem";
-            this.메모리복사ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.메모리복사ToolStripMenuItem.Text = "메모리 복사";
+            this.교수님ToolStripMenuItem.Name = "교수님ToolStripMenuItem";
+            this.교수님ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.교수님ToolStripMenuItem.Text = "교수님";
+            this.교수님ToolStripMenuItem.Click += new System.EventHandler(this.교수님ToolStripMenuItem_Click);
+            // 
+            // 정보ToolStripMenuItem1
+            // 
+            this.정보ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.사용정보ToolStripMenuItem,
+            this.버전정보ToolStripMenuItem});
+            this.정보ToolStripMenuItem1.Name = "정보ToolStripMenuItem1";
+            this.정보ToolStripMenuItem1.Size = new System.Drawing.Size(55, 20);
+            this.정보ToolStripMenuItem1.Text = "도움말";
+            // 
+            // 사용정보ToolStripMenuItem
+            // 
+            this.사용정보ToolStripMenuItem.Name = "사용정보ToolStripMenuItem";
+            this.사용정보ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.사용정보ToolStripMenuItem.Text = "사용법";
+            this.사용정보ToolStripMenuItem.Click += new System.EventHandler(this.사용정보ToolStripMenuItem_Click);
+            // 
+            // 버전정보ToolStripMenuItem
+            // 
+            this.버전정보ToolStripMenuItem.Name = "버전정보ToolStripMenuItem";
+            this.버전정보ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.버전정보ToolStripMenuItem.Text = "버전 정보";
+            this.버전정보ToolStripMenuItem.Click += new System.EventHandler(this.버전정보ToolStripMenuItem_Click);
             // 
             // Reciproc
             // 
@@ -498,10 +517,6 @@
             this.Reciproc.UseVisualStyleBackColor = true;
             this.Reciproc.Click += new System.EventHandler(this.Reciprocal_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // BracketOpen
             // 
             this.BracketOpen.Font = new System.Drawing.Font("굴림", 11F);
@@ -512,6 +527,7 @@
             this.BracketOpen.TabStop = false;
             this.BracketOpen.Text = "(";
             this.BracketOpen.UseVisualStyleBackColor = true;
+            this.BracketOpen.Visible = false;
             this.BracketOpen.Click += new System.EventHandler(this.BracketOpen_Click);
             // 
             // BracketClose
@@ -524,6 +540,7 @@
             this.BracketClose.TabStop = false;
             this.BracketClose.Text = ")";
             this.BracketClose.UseVisualStyleBackColor = true;
+            this.BracketClose.Visible = false;
             this.BracketClose.Click += new System.EventHandler(this.BracketClose_Click);
             // 
             // Power
@@ -562,7 +579,6 @@
             this.Controls.Add(this.Backspace);
             this.Controls.Add(this.CE);
             this.Controls.Add(this.AC);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.NUM6);
             this.Controls.Add(this.NUM5);
             this.Controls.Add(this.NUM9);
@@ -580,6 +596,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "계산기";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -600,7 +617,6 @@
         private System.Windows.Forms.Button NUM4;
         private System.Windows.Forms.Button NUM5;
         private System.Windows.Forms.Button NUM6;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button AC;
         private System.Windows.Forms.Button CE;
         private System.Windows.Forms.Button Backspace;
@@ -623,16 +639,18 @@
         private System.Windows.Forms.ToolStripMenuItem 공학용계산기ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 종료ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 정보ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 복사ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 붙여넣기ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem 메모리복사ToolStripMenuItem;
         private System.Windows.Forms.Button Reciproc;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button BracketOpen;
         private System.Windows.Forms.Button BracketClose;
         private System.Windows.Forms.Button Power;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem 정보ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 개발자소개ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 개발환경ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem 교수님ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 사용정보ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 버전정보ToolStripMenuItem;
     }
 }
 

@@ -117,7 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>25, 11</value>
-  </metadata>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>피연산자를 입력하고 연산자를 입력하면 출력결과가 반환됩니다.
+
+[제어 버튼]
+C : 메모리, 스크린에 있는 모든 데이터를 초기화합니다.
+AC : 스크린에 입력한 피연산자를 초기화합니다.
+←: 입력버퍼에 있는 피연산자를 한글자 지웁니다.
+
+[이항 연산자]
+연산자와 피연산자와의 연산을 합니다.
++ : 피연산자끼리의 합을 구합니다.
+- : 피연산자끼리의 차를 구합니다.
+* : 피연산자끼리의 곱을 구합니다.
+/ : 피연산자끼리의 몫을 구합니다.
+Mod : 피연산자끼리의 나머지를 구합니다.
+^ : 피연산자끼리의 제곱을 구합니다.
+ⁿ√ : 피연산자끼리의 n제곱근을 구합니다.
+
+[단항 연산자]
+현재까지 입력된 식을 모두 계산한 뒤 결과값을 스크린에 표시합니다.
+±: 부호를 변경 합니다.
+1/x : 역수를 구합니다.
+√², √³, √⁴ : 루트 연산을 합니다.
+x², x³, x⁴, 10^x: 지정된 제곱 연산을 합니다.
+Sin, Cos, Tan: 지정된 값의 Sin, Cos, Tan을 연산합니다.
+ASin, ACos, Atan : 지정된 값에 Sin, Cos, Tan을 적용 했을 때의 각도가 반환됩니다.
+n!: 팩토리얼을 반환합니다. 연산될 숫자는 반드시 자연수여야 합니다.
+log : Logn 을 구합니다.
+log2 : xLog2를 구합니다.
+ln : 지정된 숫자의 자연 로그(밑 e)를 반환합니다.
+e^x : e를 지정된 수만큼 거듭제곱하여 반환합니다.
+
+
+= : 다음 규칙에 따라 연산한 결과를 구합니다.
+1. 피연산자가 입력 되어있고, 이항연산자와 그것의 피연산자가 입력돼있을경우
+(입력한 피연산자) (연산자) (이항연산자의 피연산자)의 결과를 반환합니다.
+
+2. 이항연산자와 그것의 피연산자가 입력 되어있을경우
+(스크린에 있는 피연산자) (연산자) (이항연산자의 피연산자)의 결과를 반환합니다.
+
+3. 이항연산을 스크린에 나온 결과값을 눌럿을경우
+(스크린에 있는 피연산자) (가장 최근에 연산한 연산자) (가장 최근에 연산한 피연산자)의 결과를 반환합니다.
+</value>
+  </data>
 </root>

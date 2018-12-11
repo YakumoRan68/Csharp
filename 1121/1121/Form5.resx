@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>25, 11</value>
-  </metadata>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>1년동안 교수님에게 수업을 듣고 C#을 배우며
+한학기동안 재밌게 배울 수 있어 좋았습니다.
+
+더 만족스러운 코드를 짤려면 개인적인 공부를 필요로하고
+알고리즘 또한 뜯어 고쳐야 된다는게 좀 아쉬웠네요
+
+변수도 콩글리쉬식으로 지어서 다른 사람 코드 봐줄때에 
+무슨 뜻인지 이해하기 힘들었고 프로젝트 이름은
+변경했지만 버튼등의 변수의 이름은 변경하지 않아
+매우 불편했습니다.
+디자인 파일을 뜯어서라도 영어단어를 써서 이해가 편한
+변수명, 함수명으로 꼭 바뀌어 코딩에 불편을
+주지 않도록 도와주시면 감사하겠습니다.
+
+학교에서 이론 과목이 최대한 사라지고
+실기 과목이 늘길 바라며
+
+내년에 2학년 수업을 교수님이 맡으신다면 
+수업을 들을 수 있기를 기대하겠습니다.</value>
+  </data>
 </root>
