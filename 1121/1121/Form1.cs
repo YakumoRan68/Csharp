@@ -560,13 +560,19 @@ namespace _1121 {
             
             Hide();
         }
-        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e) => Dispose(); // 이걸 왜 안알려 주셨을까.
+        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (form_2 != null) form_2.Dispose();
+            Dispose();
+        }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            if (form_2 != null) form_2.Dispose();
+            Dispose();
+        }
         private void 개발자소개ToolStripMenuItem_Click(object sender, EventArgs e) => new Form3().ShowDialog();
         private void 사용정보ToolStripMenuItem_Click(object sender, EventArgs e) => new Form4().ShowDialog();
         private void 교수님ToolStripMenuItem_Click(object sender, EventArgs e) => new Form5().ShowDialog();
         private void 개발환경ToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("운영 체제 : Windows 10\n개발 도구 : Microsoft Visual Studio 2017\n\t", "< 개발 환경 >");
         private void 버전정보ToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("C#으로 내가 만든 계산기 1.0", "< 버전 정보 >");
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         private void 일반용계산기ToolStripMenuItem_Click(object sender, EventArgs e) {
 

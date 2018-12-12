@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace _1121 {
-    public partial class Form2 :Form {
+    public partial class Form2 : Form {
         class Expression {
             private string[] element;
             private int top;
@@ -34,7 +34,7 @@ namespace _1121 {
             public int count() {
                 int cnt = 0;
                 foreach (var v in element) {
-                    cnt = v == null ? cnt : ++cnt; 
+                    cnt = v == null ? cnt : ++cnt;
                 }
                 return cnt;
             }
@@ -52,7 +52,7 @@ namespace _1121 {
 
             public void clear() {
                 for (int i = 0; i < 3; i++) {
-                    element[i] = null; 
+                    element[i] = null;
                 }
                 top = -1;
             }
@@ -71,7 +71,7 @@ namespace _1121 {
             private string term = string.Empty;
 
             public Memory(string str) {
-                term = str; 
+                term = str;
             }
 
             public string Term {
@@ -167,7 +167,7 @@ namespace _1121 {
             return base.ProcessCmdKey(ref msg, keyData);
         }
         void CallMethodByName(string name) {
-            Type t = GetType(); 
+            Type t = GetType();
             MethodInfo method = t.GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             method.Invoke(this, new object[] { null, EventArgs.Empty });
         }
@@ -410,7 +410,7 @@ namespace _1121 {
                 case "/": result = Op1 / Op2; break;
                 case "%": result = Op1 % Op2; break;
                 case "^": result = Math.Pow(Op1, Op2); break;
-                case "yroot": result = Math.Pow(Op1, (1/Op2)); break;
+                case "yroot": result = Math.Pow(Op1, (1 / Op2)); break;
             }
             return Convert.ToString(result);
         }
@@ -608,13 +608,20 @@ namespace _1121 {
             Screen.Text = Screen.Text = string.Format("{0," + Convert.ToString(screen_max_width) + "}", ScreenBuffer);
         }
         private void 일반용계산기ToolStripMenuItem_Click(object sender, EventArgs e) {
-            Owner.Location = Location;
             Owner.Show();
+            Owner.Location = Location;
 
-            Close();
+            Hide();
         }
-        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e) => Dispose();
-        private void Form2_FormClosed(object sender, FormClosedEventArgs e) => Owner.Dispose();
+        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Owner.Dispose();
+            Dispose();
+        }
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Owner.Dispose();
+            Dispose();
+        }
         private void 개발자소개ToolStripMenuItem_Click(object sender, EventArgs e) => new Form3().ShowDialog();
         private void 사용정보ToolStripMenuItem_Click(object sender, EventArgs e) => new Form4().ShowDialog();
         private void toolStripMenuItem4_Click(object sender, EventArgs e) => new Form5().ShowDialog();
